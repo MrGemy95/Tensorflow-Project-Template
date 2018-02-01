@@ -99,3 +99,9 @@ ENV/
 
 # mypy
 .mypy_cache/
+/experiments/
+.idea/Tensorflow-architecture-templete.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/workspace.xml
+experiments/
