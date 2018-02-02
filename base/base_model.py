@@ -36,14 +36,23 @@ class BaseModel:
         Create a global step variable to be a reference to the number of iterations
         :return:
         """
-        #DON'T forget to add the global step tensor to the train step
+        # DON'T forget to add the global step tensor to the train step
         with tf.variable_scope('global_step'):
             self.global_step_tensor = tf.Variable(0, trainable=False, name='global_step')
 
-    def build_model(self):
-        raise NotImplementedError
+
+    def create_saver(function_to_decorate):
+        def wrapper(*args, **kw):
+            output = function_to_decorate(*args, **kw)
+            # self.init_saver()
+            print("post_code")
+            return output
+        return wrapper
 
     def init_saver(self):
-        # you should implement this function on any child class as  "tf.train.Saver" take snapshot of tf.variables,
-        # so you must create the saver after you build the model.
-        raise NotImplemented
+        # self.saver = tf.train.Saver(max_to_keep=self.config.max_to_keep)
+        raise NotImplementedError
+
+    @create_saver
+    def build_model(self):
+        raise NotImplementedError
