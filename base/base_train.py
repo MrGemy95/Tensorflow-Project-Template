@@ -20,9 +20,17 @@ class BaseTrain:
             self.sess.run(self.model.increment_cur_epoch_tensor)
 
     def train_epoch(self):
-        # implement epoch function
+        """
+        implement the logic of epoch:
+        -loop ever the number of iteration in the config and call teh train step
+        -add any summaries you want using the sammary
+        """
         raise NotImplementedError
 
     def train_step(self):
-        # implement train step function
+        """
+        implement the logic of the train step
+        - run the tensorflow session
+        - return any metrics you need to summarize
+        """
         raise NotImplementedError
