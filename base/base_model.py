@@ -2,13 +2,26 @@ import tensorflow as tf
 import os
 
 
+def create_saver(function_to_decorate):
+
+    def wrapper(self, *args, **kw):
+        output = function_to_decorate(self, *args, **kw)
+        self.init_saver()
+        print("post_code")
+        return output
+
+    return wrapper
+
+
 class BaseModel:
     def __init__(self, config):
         self.config = config
-        self.summaries = None
         # init the global step, global time step, the current epoch and the summaries
         self.init_global_step()
         self.init_cur_epoch()
+
+        self.summaries = None
+        self.saver = None
 
     def save(self, sess):
         print("Saving model...")
@@ -40,19 +53,9 @@ class BaseModel:
         with tf.variable_scope('global_step'):
             self.global_step_tensor = tf.Variable(0, trainable=False, name='global_step')
 
-
-    def create_saver(function_to_decorate):
-        def wrapper(*args, **kw):
-            output = function_to_decorate(*args, **kw)
-            # self.init_saver()
-            print("post_code")
-            return output
-        return wrapper
-
     def init_saver(self):
-        # self.saver = tf.train.Saver(max_to_keep=self.config.max_to_keep)
-        raise NotImplementedError
+        self.saver = tf.train.Saver(max_to_keep=self.config.max_to_keep)
+        print("Saver initiated")
 
-    @create_saver
     def build_model(self):
         raise NotImplementedError
