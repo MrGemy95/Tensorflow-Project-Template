@@ -1,12 +1,10 @@
-from base.base_model import BaseModel, create_saver
+from base.base_model import BaseModel
 import tensorflow as tf
 
 
 class ExampleModel(BaseModel):
     def __init__(self, config):
-        super(ExampleModel, self).__init__(config)
-
-        ExampleModel.build_model = create_saver(ExampleModel.build_model)
+        super(ExampleModel, self).__init__(config, ExampleModel)
 
         self.build_model()
 

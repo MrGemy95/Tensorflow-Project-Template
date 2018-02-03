@@ -14,7 +14,7 @@ def create_saver(function_to_decorate):
 
 
 class BaseModel:
-    def __init__(self, config):
+    def __init__(self, config, child):
         self.config = config
         # init the global step, global time step, the current epoch and the summaries
         self.init_global_step()
@@ -22,6 +22,9 @@ class BaseModel:
 
         self.summaries = None
         self.saver = None
+
+        child.build_model = create_saver(child.build_model)
+
 
     def save(self, sess):
         print("Saving model...")
@@ -57,5 +60,8 @@ class BaseModel:
         self.saver = tf.train.Saver(max_to_keep=self.config.max_to_keep)
         print("Saver initiated")
 
+    @classmethod
+    def cls_create_saver(cls, func):
+        pass
     def build_model(self):
         raise NotImplementedError
