@@ -60,8 +60,5 @@ class BaseModel:
         self.saver = tf.train.Saver(max_to_keep=self.config.max_to_keep)
         print("Saver initiated")
 
-    @classmethod
-    def cls_create_saver(cls, func):
-        pass
     def build_model(self):
         raise NotImplementedError
