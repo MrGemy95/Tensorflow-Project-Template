@@ -1,3 +1,4 @@
+|PyPI-Status| |PyPI-Versions| |Build-Status| |Codecov| |LICENCE|
 # Tensorflow Project Templete
 A simple and well designed structure is essential for any Deep Learning project, so after a lot of practice and contributing in tensorflow projects here's a tensorflow project templete that combines   **simplcity**, **best practice for folder structure** and **good OOP design**.
 The main idea is that there's much stuff you do every time you start your tensorflow project so wrapping all this shared stuff will help you to get into the main project faster.
@@ -26,6 +27,9 @@ In a nutshell here's how to use this templete, so for example assume you want to
 
   >>> import numpy as np
  
+.. contents::
+
+.. section-numbering::
 
 - Override these two functions "build_model" where you implement the vgg model, and "init_saver" where you define a tensorflow saver, then call them in the initalizer.
 - Create a VGG trainer in trainers folder that inherit from "base_train" class
