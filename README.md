@@ -48,8 +48,8 @@ The main idea is that there's much stuff you do every time you start your tensor
 ```
 --------------
 ## Main Components
---------------
 ### Models
+--------------
 ##### base model
 Base model is an abstract class that must be inherted by any model you create, the idea behind this is that there's much shared stuff between all models.
 The base model contains:
