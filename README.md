@@ -13,6 +13,9 @@ The main idea is that there's much stuff you do every time you start your tensor
         -  [Trainer](https://github.com/Mrgemy95/Tensorflow-Project-Templete#ptrainer)
         -  [Data Loader](https://github.com/Mrgemy95/Tensorflow-Project-Templete#data-loader)
         -  [Logger](https://github.com/Mrgemy95/Tensorflow-Project-Templete#logger)
+        -  [Configration](https://github.com/Mrgemy95/Tensorflow-Project-Templete#logger)
+        -  [Main](https://github.com/Mrgemy95/Tensorflow-Project-Templete#logger)
+ -  [references](https://github.com/Mrgemy95/Tensorflow-Project-Templete#references)
  -  [references](https://github.com/Mrgemy95/Tensorflow-Project-Templete#references)
 
 # In a Nutshell
@@ -83,10 +86,28 @@ Folder structure
     3. override "init_save" where you create a tensorflow saver to use it to save and load checkpoint
     4. call the "build_model" and "init_saver" in the initalizer.
 ######
-#### Trainer
+### Trainer
+- ##### **Base trainer**
+    Base trainer is an abstract class that just wrap the training process.
+- ##### **Your trainer**
+     Here's what you shoulf implement in your trainer.
+    1. Create your trainer class and Inherit the base_trainer class.
+    2. override these two functions "train_step", "train_epoch" where you implement the training process of each step and each epoch.
 #### Data Loader
+These class is responsiple for all data handling and processing and provide an easy interface that can be used by the trainer.
 #### Logger
+This class is responsiple for the tensorboard summary, in your trainer create a dictionary of all tensorflow variables you want to summarize then pass this dictionary to logger.summarize().
+#### Configration
+I use Json as configration method and then parse it, so write all configs you want then parse it using "utils/config/process_config" and pass this configration object to all other objects.
+#### Main
+Here's where you combine all previous part.
+1. Parse the config file.
+2. Create a tensorflow session.
+2. Create an instance of "Model", "Data_Generator" and "Logger" and parse the config to all of them.
+3. Create an instance of "Trainer" and pass all previous objects to it.
+4. Now you can train your model by calling "Trainer.train()"
 
 
-### References
+# Future Work
+- Replace the data loader part with new tensorflow dataset API.
 
