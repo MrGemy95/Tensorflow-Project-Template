@@ -20,7 +20,7 @@ The main idea is that there's much stuff you do every time you start your tensor
 
 # In a Nutshell   
 In a nutshell here's how to use this templete, so **for example** assume you want to implement VGG model so you should do the following:
-- Create a class named VGG in models folder that inherit the "base_model" class
+-  In models folder create a class named VGG that inherit the "base_model" class
 
 ```python
 
@@ -44,14 +44,14 @@ In a nutshell here's how to use this templete, so **for example** assume you wan
 
   ```
    
-- Create a VGG trainer in trainers folder that inherit from "base_train" class
+- In trainers folder create a VGG trainer that inherit from "base_train" class
 ```python
 
     class VGGTrainer(BaseTrain):
         def __init__(self, sess, model, data, config, logger):
             super(VGGTrainer, self).__init__(sess, model, data, config, logger)
 ```
-- Override these 2 functions "train_step", "train_epoch" where you write the logic of the training process
+- Override these two functions "train_step", "train_epoch" where you write the logic of the training process
 ```python
 
     def train_epoch(self):
@@ -75,7 +75,7 @@ In a nutshell here's how to use this templete, so **for example** assume you wan
 ```python
     sess = tf.Session()
     # create instance of the model you want
-    model = ExampleModel(config)
+    model = VGGModel(config)
     # create your data generator
     data = DataGenerator(config)
     # create tensorboard logger
@@ -83,10 +83,10 @@ In a nutshell here's how to use this templete, so **for example** assume you wan
 ```
 - Pass the all these objects to the trainer object, and start your training by calling "trainer.train()" 
 ```python
-    trainer = ExampleTrainer(sess, model, data, config, logger)
+    trainer = VGGTrainer(sess, model, data, config, logger)
 
-     # here you train your model
-     trainer.train()
+    # here you train your model
+    trainer.train()
 
 ```
 **You will a templete file and a simple example in the model and trainer folder that shows you how to try your first model simply.** 
