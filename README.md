@@ -47,9 +47,9 @@ class VGGModel(BaseModel):
 - Create a VGG trainer in trainers folder that inherit from "base_train" class
 ```python
 
-class TempleteTrainer(BaseTrain):
+class VGGTrainer(BaseTrain):
     def __init__(self, sess, model, data, config, logger):
-        super(TempleteTrainer, self).__init__(sess, model, data, config, logger)
+        super(VGGTrainer, self).__init__(sess, model, data, config, logger)
 ```
 - Override these 2 functions "train_step", "train_epoch" where you write the logic of the training process
 ```python
@@ -71,7 +71,7 @@ class TempleteTrainer(BaseTrain):
         pass
 
 ```
-- Create your main file where you create the session and create instance of the following objects "Model", "Logger", "Data_Generator", "Trainer", and config
+- In main file you create the session and create instance of the following objects "Model", "Logger", "Data_Generator", "Trainer", and config
 ```python
     sess = tf.Session()
     # create instance of the model you want
@@ -85,8 +85,8 @@ class TempleteTrainer(BaseTrain):
 ```python
  trainer = ExampleTrainer(sess, model, data, config, logger)
 
-    # here you train your model
-    trainer.train()
+ # here you train your model
+ trainer.train()
 
 ```
 **You will a templete file and a simple example in the model and trainer folder that shows you how to try your first model simply.** 
@@ -110,7 +110,7 @@ Folder structure
 ```
 ├──  base
 │   ├── base_model.py   - this file contains the abstract class of the model.
-│   └── ease_trainer.py - this file contains the abstract class of the trainer.
+│   └── ease_train.py - this file contains the abstract class of the trainer.
 │
 │
 ├── model               -This folder contains any model of your project.
