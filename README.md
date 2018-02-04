@@ -2,7 +2,7 @@
 A simple and well designed OOP structure is essential for any Deep Learning project, so after a lot of practice and contributing in tensorflow projects here's a tensorflow project templete that combines   **simplcity**, **best practice for folder structure** and **good OOP design**.
 The main idea is that there's much stuff you do every time you start your tensorflow project so wrapping all this shared stuff will help you to get into the main project faster.
 
-## Table Of Content
+# Table Of Content
 
 -  [In a Nutshell](https://github.com/Mrgemy95/Tensorflow-Project-Templete#project-architecture)
 -  [In Details](https://github.com/Mrgemy95/Tensorflow-Project-Templete#project-architecture)
@@ -15,11 +15,12 @@ The main idea is that there's much stuff you do every time you start your tensor
         -  [Logger](https://github.com/Mrgemy95/Tensorflow-Project-Templete#logger)
  -  [references](https://github.com/Mrgemy95/Tensorflow-Project-Templete#references)
 
-## In a Nutshell
+# In a Nutshell
 
 
 
-## In Details
+# In Details
+
 Project architecture 
 --------------
 
@@ -56,20 +57,20 @@ Folder structure
 ## Main Components
 --------------
 ### Models
---------------
-##### base model
---------------
-Base model is an abstract class that must be inherted by any model you create, the idea behind this is that there's much shared stuff between all models.
-The base model contains:
-1. **Save** -This function to save a checkpoint to the desk. 
-2. **Load** -This function to load a checkpoint from the desk.
-3. **Cur_epoch, Global_step counters** -These variables to keep track of the curerent epoch and global step.
-4. **Init_Saver** An abstract function to inialize the saver used for saving and loading the checkpoint, **Note**: override this function in the model you want to implement.
-5. **Build_model** Here's an abstract function to define the model, **Note**: override this function in the model you want to implement.
-##### Your model
-Here's where you implement your model.
-So you should :
-1. 
+
+- ##### base model
+    
+    Base model is an abstract class that must be inherted by any model you create, the idea behind this is that there's much shared stuff between all models.
+    The base model contains:
+    1. **Save** -This function to save a checkpoint to the desk. 
+    2. **Load** -This function to load a checkpoint from the desk.
+    3. **Cur_epoch, Global_step counters** -These variables to keep track of the curerent epoch and global step.
+    4. **Init_Saver** An abstract function to inialize the saver used for saving and loading the checkpoint, **Note**: override this function in the model you want to implement.
+    5. **Build_model** Here's an abstract function to define the model, **Note**: override this function in the model you want to implement.
+- ##### Your model
+    Here's where you implement your model.
+    So you should :
+    1. 
 ######
 #### Trainer
 #### Data Loader
