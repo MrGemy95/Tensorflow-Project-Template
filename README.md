@@ -6,11 +6,11 @@ The main idea is that there's much stuff you do every time you start your tensor
 - ### [Project architecture](https://github.com/Mrgemy95/Tensorflow-Project-Templete#project-architecture-1)
 - ### [Folder structure](https://github.com/Mrgemy95/Tensorflow-Project-Templete#folder-structure-1)
 - ### [ Main Components](https://github.com/Mrgemy95/Tensorflow-Project-Templete#main-components-1)
-    - ##### [Model](https://github.com/Mrgemy95/Tensorflow-Project-Templete#model-1)
-    - ##### [Trainer](https://github.com/Mrgemy95/Tensorflow-Project-Templete#ptrainer-1)
-    - ##### [Data Loader](https://github.com/Mrgemy95/Tensorflow-Project-Templete#data-loader-1)
-    - ##### [Logger](https://github.com/Mrgemy95/Tensorflow-Project-Templete#logger-1)
-- ##### [references](https://github.com/Mrgemy95/Tensorflow-Project-Templete#references)
+    - #### [Model](https://github.com/Mrgemy95/Tensorflow-Project-Templete#model-1)
+    - #### [Trainer](https://github.com/Mrgemy95/Tensorflow-Project-Templete#ptrainer-1)
+    - #### [Data Loader](https://github.com/Mrgemy95/Tensorflow-Project-Templete#data-loader-1)
+    - #### [Logger](https://github.com/Mrgemy95/Tensorflow-Project-Templete#logger-1)
+- ### [references](https://github.com/Mrgemy95/Tensorflow-Project-Templete#references)
 
 Project architecture 
 --------------
