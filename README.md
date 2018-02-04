@@ -23,10 +23,19 @@ In a nutshell here's how to use this templete, so for example assume you want to
 - Create a class named VGG in models folder that inherit the "base_model" class
 
 ```python
-import numpy as np
-  ```
 
+class VGGModel(BaseModel):
+    def __init__(self, config):
+        super(VGGModel, self).__init__(config)
+  ```
 - Override these two functions "build_model" where you implement the vgg model, and "init_saver" where you define a tensorflow saver, then call them in the initalizer.
+    
+```python
+ def build_model(self):
+        # here you build the tensorflow graph of any model you want and also define the loss.
+        pass
+  ```
+   
 - Create a VGG trainer in trainers folder that inherit from "base_train" class
 - Override these 2 functions "train_step", "train_epoch" where you write the logic of the training process
 - Create your main file where you create instance of the following objects "Model", "Logger", "Data_Generator", "Trainer", and config
