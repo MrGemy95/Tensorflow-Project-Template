@@ -79,18 +79,18 @@ Folder structure
     
     Base model is an abstract class that must be Inherited by any model you create, the idea behind this is that there's much shared stuff between all models.
     The base model contains:
-    1. ***Save*** -This function to save a checkpoint to the desk. 
-    2. ***Load*** -This function to load a checkpoint from the desk.
-    3. ***Cur_epoch, Global_step counters*** -These variables to keep track of the curerent epoch and global step.
-    4. ***Init_Saver*** An abstract function to inialize the saver used for saving and loading the checkpoint, ***Note***: override this function in the model you want to implement.
-    5. ***Build_model*** Here's an abstract function to define the model, ***Note***: override this function in the model you want to implement.
+    - ***Save*** -This function to save a checkpoint to the desk. 
+    - ***Load*** -This function to load a checkpoint from the desk.
+    - ***Cur_epoch, Global_step counters*** -These variables to keep track of the curerent epoch and global step.
+    - ***Init_Saver*** An abstract function to inialize the saver used for saving and loading the checkpoint, ***Note***: override this function in the model you want to implement.
+    - ***Build_model*** Here's an abstract function to define the model, ***Note***: override this function in the model you want to implement.
 - #### **Your model**
     Here's where you implement your model.
     So you should :
-    1. Create your model class and Inherit the base_model class
-    2. override "build_model" where you write the tensorflow model you want
-    3. override "init_save" where you create a tensorflow saver to use it to save and load checkpoint
-    4. call the "build_model" and "init_saver" in the initalizer.
+    - Create your model class and Inherit the base_model class
+    - override "build_model" where you write the tensorflow model you want
+    - override "init_save" where you create a tensorflow saver to use it to save and load checkpoint
+    - call the "build_model" and "init_saver" in the initalizer.
 
 ### Trainer
 --------------
