@@ -66,9 +66,9 @@ Folder structure
 
 ## Main Components
 
-#### Models
+### Models
 --------------
-- ##### **Base model**
+- #### **Base model**
     
     Base model is an abstract class that must be Inherited by any model you create, the idea behind this is that there's much shared stuff between all models.
     The base model contains:
@@ -77,19 +77,19 @@ Folder structure
     3. ***Cur_epoch, Global_step counters*** -These variables to keep track of the curerent epoch and global step.
     4. ***Init_Saver*** An abstract function to inialize the saver used for saving and loading the checkpoint, ***Note***: override this function in the model you want to implement.
     5. ***Build_model*** Here's an abstract function to define the model, ***Note***: override this function in the model you want to implement.
-- ##### **Your model**
+- #### **Your model**
     Here's where you implement your model.
     So you should :
     1. Create your model class and Inherit the base_model class
     2. override "build_model" where you write the tensorflow model you want
     3. override "init_save" where you create a tensorflow saver to use it to save and load checkpoint
     4. call the "build_model" and "init_saver" in the initalizer.
-######
+
 ### Trainer
 --------------
-- ##### **Base trainer**
+- #### **Base trainer**
     Base trainer is an abstract class that just wrap the training process.
-- ##### **Your trainer**
+- #### **Your trainer**
      Here's what you shoulf implement in your trainer.
     1. Create your trainer class and Inherit the base_trainer class.
     2. override these two functions "train_step", "train_epoch" where you implement the training process of each step and each epoch.
