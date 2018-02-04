@@ -11,7 +11,7 @@ The main idea is that there's much stuff you do every time you start your tensor
     - ##### Data Loader
     - ##### Logger
 
-### Project architecture 
+## Project architecture 
 
 
 Folder structure
