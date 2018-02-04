@@ -34,6 +34,12 @@ In a nutshell here's how to use this templete, assume you want to implement vgg 
 Project architecture 
 --------------
 
+<div align="center">
+
+<img align="center" hight="600" width="600" src="https://github.com/Mrgemy95/Tensorflow-Project-Templete/figures/diagram.gif?raw=true">
+
+</div>
+
 
 Folder structure
 --------------
