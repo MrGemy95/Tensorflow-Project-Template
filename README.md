@@ -29,14 +29,14 @@ In a nutshell here's how to use this templete, assume you want to implement vgg 
 **You will a templete file and a simple example in the model and trainer folder that shows you how to try your first model simply.** 
 
 
-# In Details 
+# In Details
 
 Project architecture 
 --------------
 
 <div align="center">
 
-<img align="center" hight="600" width="600" src="https://github.com/Mrgemy95/Tensorflow-Project-Templete/figures/diagram.png?raw=true">
+<img align="center" hight="600" width="600" src="https://github.com/Mrgemy95/Tensorflow-Project-Templete/blob/master/figures/diagram.png?raw=true">
 
 </div>
 
