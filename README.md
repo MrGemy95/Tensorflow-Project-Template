@@ -15,7 +15,8 @@ The main idea is that there's much stuff you do every time you start your tensor
         -  [Logger](https://github.com/Mrgemy95/Tensorflow-Project-Templete#logger)
         -  [Configration](https://github.com/Mrgemy95/Tensorflow-Project-Templete#configration)
         -  [Main](https://github.com/Mrgemy95/Tensorflow-Project-Templete#main)
- -  [references](https://github.com/Mrgemy95/Tensorflow-Project-Templete#references)
+ -  [Future Works](https://github.com/Mrgemy95/Tensorflow-Project-Templete#future-works)
+ -  [Contributing](https://github.com/Mrgemy95/Tensorflow-Project-Templete#Contributing)
 
 # In a Nutshell
 In a nutshell here's how to use this templete, assume you want to implement vgg model so you should do the following:
@@ -114,8 +115,8 @@ Here's where you combine all previous part.
 4. Now you can train your model by calling "Trainer.train()"
 
 
-# Future Work
+# Future Works
 - Replace the data loader part with new tensorflow dataset API.
 
-#Contributing
+# Contributing
 Any kind of enhancement, or contribution is welcomed.
