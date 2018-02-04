@@ -2,6 +2,7 @@
 A simple and well designed structure is essential for any Deep Learning project, so after a lot of practice and contributing in tensorflow projects here's a tensorflow project templete that combines   **simplcity**, **best practice for folder structure** and **good OOP design**.
 The main idea is that there's much stuff you do every time you start your tensorflow project so wrapping all this shared stuff will help you to get into the main project faster.
 
+**So here's a simple tensorflow templete that help you get into your main project faster and just focus on your core (Model, Training, ...etc)**
 # Table Of Content
 
 -  [In a Nutshell](https://github.com/Mrgemy95/Tensorflow-Project-Templete#project-architecture)
@@ -35,8 +36,8 @@ In a nutshell here's how to use this templete, so **for example** assume you wan
     
 ```python
      def build_model(self):
-            # here you build the tensorflow graph of any model you want and also define the loss.
-            pass
+        # here you build the tensorflow graph of any model you want and also define the loss.
+        pass
             
      def init_saver(self):
         #here you initalize the tensorflow saver that will be used in saving the checkpoints.
