@@ -21,6 +21,12 @@ The main idea is that there's much stuff you do every time you start your tensor
 # In a Nutshell   
 In a nutshell here's how to use this templete, so for example assume you want to implement vgg model so you should do the following:
 - Create a class named VGG in models folder that inherit the "base_model" class
+
+.. code-block:: python
+
+  >>> import numpy as np
+ 
+
 - Override these two functions "build_model" where you implement the vgg model, and "init_saver" where you define a tensorflow saver, then call them in the initalizer.
 - Create a VGG trainer in trainers folder that inherit from "base_train" class
 - Override these 2 functions "train_step", "train_epoch" where you write the logic of the training process
