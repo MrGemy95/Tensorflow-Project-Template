@@ -27,6 +27,9 @@ In a nutshell here's how to use this templete, so for example assume you want to
 class VGGModel(BaseModel):
     def __init__(self, config):
         super(VGGModel, self).__init__(config)
+        #call the build_model and init_saver functions.
+        self.build_model() 
+        self.init_saver() 
   ```
 - Override these two functions "build_model" where you implement the vgg model, and "init_saver" where you define a tensorflow saver, then call them in the initalizer.
     
@@ -34,10 +37,40 @@ class VGGModel(BaseModel):
  def build_model(self):
         # here you build the tensorflow graph of any model you want and also define the loss.
         pass
+        
+ def init_saver(self):
+    #here you initalize the tensorflow saver that will be used in saving the checkpoints.
+    self.saver = tf.train.Saver(max_to_keep=self.config.max_to_keep)
+
   ```
    
 - Create a VGG trainer in trainers folder that inherit from "base_train" class
+```python
+
+class TempleteTrainer(BaseTrain):
+    def __init__(self, sess, model, data, config, logger):
+        super(TempleteTrainer, self).__init__(sess, model, data, config, logger)
+```
 - Override these 2 functions "train_step", "train_epoch" where you write the logic of the training process
+```python
+
+    def train_epoch(self):
+        """
+       implement the logic of epoch:
+       -loop ever the number of iteration in the config and call teh train step
+       -add any summaries you want using the sammary
+        """
+        pass
+
+    def train_step(self):
+        """
+       implement the logic of the train step
+       - run the tensorflow session
+       - return any metrics you need to summarize
+       """
+        pass
+
+```
 - Create your main file where you create instance of the following objects "Model", "Logger", "Data_Generator", "Trainer", and config
 - Pass the all these objects to the trainer object, and start your training by calling "trainer.train()" 
 
