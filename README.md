@@ -4,21 +4,25 @@ The main idea is that there's much stuff you do every time you start your tensor
 
 ## Table Of Content
  - ### Project architecture 
-- ### Folder structure
+- ### [Folder structure](https://github.com/Mrgemy95/Tensorflow-Project-Templete#project-architecture-1)
 - ### Main Components
     - ##### Model
     - ##### Trainer
     - ##### Data Loader
     - ##### Logger
 
-## Project architecture 
+Project architecture 
+--------------
 
 
 Folder structure
 --------------
+
+
 Main Components
 --------------
 #### Model
+
 #### Trainer
 #### Data Loader
 #### Logger
