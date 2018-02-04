@@ -11,6 +11,17 @@ The main idea is that there's much stuff you do every time you start your tensor
     - ##### Data Loader
     - ##### Logger
 
+## Project architecture 
+--------------
+## Folder structure
+--------------
+## Main Components
+--------------
+#### Model
+#### Trainer
+#### Data Loader
+#### Logger
+[create dasdasdan anchor] ( #Main Components)
 
 
 ### References
