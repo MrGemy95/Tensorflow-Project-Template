@@ -29,7 +29,7 @@ In a nutshell here's how to use this templete, assume you want to implement vgg 
 **You will a templete file and a simple example in the model and trainer folder that shows you how to try your first model simply.** 
 
 
-# In Details
+# In Details 
 
 Project architecture 
 --------------
