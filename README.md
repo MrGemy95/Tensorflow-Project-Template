@@ -13,9 +13,8 @@ The main idea is that there's much stuff you do every time you start your tensor
         -  [Trainer](https://github.com/Mrgemy95/Tensorflow-Project-Templete#ptrainer)
         -  [Data Loader](https://github.com/Mrgemy95/Tensorflow-Project-Templete#data-loader)
         -  [Logger](https://github.com/Mrgemy95/Tensorflow-Project-Templete#logger)
-        -  [Configration](https://github.com/Mrgemy95/Tensorflow-Project-Templete#logger)
-        -  [Main](https://github.com/Mrgemy95/Tensorflow-Project-Templete#logger)
- -  [references](https://github.com/Mrgemy95/Tensorflow-Project-Templete#references)
+        -  [Configration](https://github.com/Mrgemy95/Tensorflow-Project-Templete#configration)
+        -  [Main](https://github.com/Mrgemy95/Tensorflow-Project-Templete#main)
  -  [references](https://github.com/Mrgemy95/Tensorflow-Project-Templete#references)
 
 # In a Nutshell
@@ -68,7 +67,7 @@ Folder structure
 ## Main Components
 
 ### Models
-
+--------------
 - ##### **Base model**
     
     Base model is an abstract class that must be Inherited by any model you create, the idea behind this is that there's much shared stuff between all models.
@@ -87,6 +86,7 @@ Folder structure
     4. call the "build_model" and "init_saver" in the initalizer.
 ######
 ### Trainer
+--------------
 - ##### **Base trainer**
     Base trainer is an abstract class that just wrap the training process.
 - ##### **Your trainer**
