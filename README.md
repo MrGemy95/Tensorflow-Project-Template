@@ -66,7 +66,7 @@ Folder structure
 
 --------------
 ## Main Components
---------------
+
 ### Models
 
 - ##### **Base model**
@@ -93,13 +93,13 @@ Folder structure
      Here's what you shoulf implement in your trainer.
     1. Create your trainer class and Inherit the base_trainer class.
     2. override these two functions "train_step", "train_epoch" where you implement the training process of each step and each epoch.
-#### Data Loader
+### Data Loader
 These class is responsiple for all data handling and processing and provide an easy interface that can be used by the trainer.
-#### Logger
+### Logger
 This class is responsiple for the tensorboard summary, in your trainer create a dictionary of all tensorflow variables you want to summarize then pass this dictionary to logger.summarize().
-#### Configration
+### Configration
 I use Json as configration method and then parse it, so write all configs you want then parse it using "utils/config/process_config" and pass this configration object to all other objects.
-#### Main
+### Main
 Here's where you combine all previous part.
 1. Parse the config file.
 2. Create a tensorflow session.
