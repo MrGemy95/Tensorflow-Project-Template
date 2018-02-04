@@ -52,7 +52,7 @@ Folder structure
 │
 │
 ├── model               -This folder contains any model of your project.
-│   └── xample_model.py
+│   └── example_model.py
 │
 │
 ├── trainer             -this folder contains trainers of your project.
