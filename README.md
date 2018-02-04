@@ -59,11 +59,11 @@ Folder structure
 │ 
 └── utils
      ├── logger.py
-     └── llny_other_utils_you_need
+     └── any_other_utils_you_need
 
 ```
 
---------------
+
 ## Main Components
 
 ### Models
@@ -111,3 +111,5 @@ Here's where you combine all previous part.
 # Future Work
 - Replace the data loader part with new tensorflow dataset API.
 
+#Contributing
+Any kind of enhancement, or contribution is welcomed.
