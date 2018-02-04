@@ -21,23 +21,22 @@ Folder structure
 
 ```
 ├──  base
-│   ├── base_model.py  - this file contains the abstract class of the model
-│   └── ease_trainer.py - this file contains the abstract class of the trainer
+│   ├── base_model.py   - this file contains the abstract class of the model.
+│   └── ease_trainer.py - this file contains the abstract class of the trainer.
 │
 │
-├── model               <-This folder contains any model of your project
+├── model               -This folder contains any model of your project.
 │   └── xample_model.py
 │
 │
-├── trainer           <-this folder contains trainers of your project
+├── trainer             -this folder contains trainers of your project.
 │   └── example_trainer.py
 │   
-├──  mains       <- here's the main/s of your project (you may need more than one main
+├──  mains              - here's the main/s of your project (you may need more than one main.
 │                         
 │  
 ├──  data _loader  
-│    └── data_generator.py
-│ 
+│    └── data_generator.py  - here's the data_generator that responsiple for all data handling.
 └── utils
      ├── logger.py
      └── llny_other_utils_you_need
