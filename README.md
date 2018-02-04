@@ -71,9 +71,24 @@ class TempleteTrainer(BaseTrain):
         pass
 
 ```
-- Create your main file where you create instance of the following objects "Model", "Logger", "Data_Generator", "Trainer", and config
+- Create your main file where you create the session and create instance of the following objects "Model", "Logger", "Data_Generator", "Trainer", and config
+```python
+    sess = tf.Session()
+    # create instance of the model you want
+    model = ExampleModel(config)
+    # create your data generator
+    data = DataGenerator(config)
+    # create tensorboard logger
+    logger = Logger(sess, config)
+```
 - Pass the all these objects to the trainer object, and start your training by calling "trainer.train()" 
+```python
+ trainer = ExampleTrainer(sess, model, data, config, logger)
 
+    # here you train your model
+    trainer.train()
+
+```
 **You will a templete file and a simple example in the model and trainer folder that shows you how to try your first model simply.** 
 
 
