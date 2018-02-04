@@ -19,37 +19,37 @@ The main idea is that there's much stuff you do every time you start your tensor
  -  [Contributing](https://github.com/Mrgemy95/Tensorflow-Project-Templete#Contributing)
 
 # In a Nutshell   
-In a nutshell here's how to use this templete, so for example assume you want to implement vgg model so you should do the following:
+In a nutshell here's how to use this templete, so **for example** assume you want to implement VGG model so you should do the following:
 - Create a class named VGG in models folder that inherit the "base_model" class
 
 ```python
 
-class VGGModel(BaseModel):
-    def __init__(self, config):
-        super(VGGModel, self).__init__(config)
-        #call the build_model and init_saver functions.
-        self.build_model() 
-        self.init_saver() 
+    class VGGModel(BaseModel):
+        def __init__(self, config):
+            super(VGGModel, self).__init__(config)
+            #call the build_model and init_saver functions.
+            self.build_model() 
+            self.init_saver() 
   ```
 - Override these two functions "build_model" where you implement the vgg model, and "init_saver" where you define a tensorflow saver, then call them in the initalizer.
     
 ```python
- def build_model(self):
-        # here you build the tensorflow graph of any model you want and also define the loss.
-        pass
-        
- def init_saver(self):
-    #here you initalize the tensorflow saver that will be used in saving the checkpoints.
-    self.saver = tf.train.Saver(max_to_keep=self.config.max_to_keep)
+     def build_model(self):
+            # here you build the tensorflow graph of any model you want and also define the loss.
+            pass
+            
+     def init_saver(self):
+        #here you initalize the tensorflow saver that will be used in saving the checkpoints.
+        self.saver = tf.train.Saver(max_to_keep=self.config.max_to_keep)
 
   ```
    
 - Create a VGG trainer in trainers folder that inherit from "base_train" class
 ```python
 
-class VGGTrainer(BaseTrain):
-    def __init__(self, sess, model, data, config, logger):
-        super(VGGTrainer, self).__init__(sess, model, data, config, logger)
+    class VGGTrainer(BaseTrain):
+        def __init__(self, sess, model, data, config, logger):
+            super(VGGTrainer, self).__init__(sess, model, data, config, logger)
 ```
 - Override these 2 functions "train_step", "train_epoch" where you write the logic of the training process
 ```python
@@ -83,10 +83,10 @@ class VGGTrainer(BaseTrain):
 ```
 - Pass the all these objects to the trainer object, and start your training by calling "trainer.train()" 
 ```python
- trainer = ExampleTrainer(sess, model, data, config, logger)
+    trainer = ExampleTrainer(sess, model, data, config, logger)
 
- # here you train your model
- trainer.train()
+     # here you train your model
+     trainer.train()
 
 ```
 **You will a templete file and a simple example in the model and trainer folder that shows you how to try your first model simply.** 
