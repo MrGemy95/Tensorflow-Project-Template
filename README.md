@@ -11,7 +11,7 @@ The main idea is that there's much stuff you do every time you start your tensor
     -  [Folder structure](https://github.com/Mrgemy95/Tensorflow-Project-Templete#folder-structure)
     -  [ Main Components](https://github.com/Mrgemy95/Tensorflow-Project-Templete#main-components)
         -  [Model](https://github.com/Mrgemy95/Tensorflow-Project-Templete#model)
-        -  [Trainer](https://github.com/Mrgemy95/Tensorflow-Project-Templete#ptrainer)
+        -  [Trainer](#trainer)
         -  [Data Loader](https://github.com/Mrgemy95/Tensorflow-Project-Templete#data-loader)
         -  [Logger](https://github.com/Mrgemy95/Tensorflow-Project-Templete#logger)
         -  [Configration](https://github.com/Mrgemy95/Tensorflow-Project-Templete#configration)
