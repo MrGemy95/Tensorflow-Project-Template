@@ -5,8 +5,8 @@ The main idea is that there's much stuff you do every time you start your tensor
 **So here's a simple tensorflow templete that help you get into your main project faster and just focus on your core (Model, Training, ...etc)**
 # Table Of Content
 
--  [In a Nutshell](https://github.com/Mrgemy95/Tensorflow-Project-Templete#project-architecture)
--  [In Details](https://github.com/Mrgemy95/Tensorflow-Project-Templete#project-architecture)
+-  [In a Nutshell](https://github.com/Mrgemy95/Tensorflow-Project-Templete#in-a-nutshell)
+-  [In Details](https://github.com/Mrgemy95/Tensorflow-Project-Templete#in-details)
     -  [Project architecture](https://github.com/Mrgemy95/Tensorflow-Project-Templete#project-architecture)
     -  [Folder structure](https://github.com/Mrgemy95/Tensorflow-Project-Templete#folder-structure)
     -  [ Main Components](https://github.com/Mrgemy95/Tensorflow-Project-Templete#main-components)
