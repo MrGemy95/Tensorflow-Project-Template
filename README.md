@@ -167,7 +167,7 @@ Folder structure
 These class is responsible for all data handling and processing and provide an easy interface that can be used by the trainer.
 ### Logger
 This class is responsible for the tensorboard summary, in your trainer create a dictionary of all tensorflow variables you want to summarize then pass this dictionary to logger.summarize().
-### Configration
+### Configuration
 I use Json as configuration method and then parse it, so write all configs you want then parse it using "utils/config/process_config" and pass this configuration object to all other objects.
 ### Main
 Here's where you combine all previous part.
