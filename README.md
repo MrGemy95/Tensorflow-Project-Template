@@ -5,19 +5,19 @@ The main idea is that there's much stuff you do every time you start your tensor
 **So here's a simple tensorflow templete that help you get into your main project faster and just focus on your core (Model, Training, ...etc)**
 # Table Of Content
 
--  [In a Nutshell](https://github.com/Mrgemy95/Tensorflow-Project-Templete#in-a-nutshell)
--  [In Details](https://github.com/Mrgemy95/Tensorflow-Project-Templete#in-details)
-    -  [Project architecture](https://github.com/Mrgemy95/Tensorflow-Project-Templete#project-architecture)
-    -  [Folder structure](https://github.com/Mrgemy95/Tensorflow-Project-Templete#folder-structure)
-    -  [ Main Components](https://github.com/Mrgemy95/Tensorflow-Project-Templete#main-components)
-        -  [Model](https://github.com/Mrgemy95/Tensorflow-Project-Templete#model)
+-  [In a Nutshell](#in-a-nutshell)
+-  [In Details](#in-details)
+    -  [Project architecture](#project-architecture)
+    -  [Folder structure](#folder-structure)
+    -  [ Main Components](#main-components)
+        -  [Model](#model)
         -  [Trainer](#trainer)
-        -  [Data Loader](https://github.com/Mrgemy95/Tensorflow-Project-Templete#data-loader)
-        -  [Logger](https://github.com/Mrgemy95/Tensorflow-Project-Templete#logger)
-        -  [Configration](https://github.com/Mrgemy95/Tensorflow-Project-Templete#configration)
-        -  [Main](https://github.com/Mrgemy95/Tensorflow-Project-Templete#main)
- -  [Future Works](https://github.com/Mrgemy95/Tensorflow-Project-Templete#future-works)
- -  [Contributing](https://github.com/Mrgemy95/Tensorflow-Project-Templete#Contributing)
+        -  [Data Loader](#data-loader)
+        -  [Logger](#logger)
+        -  [Configration](#configration)
+        -  [Main](#main)
+ -  [Future Works](#future-works)
+ -  [Contributing](#Contributing)
 
 # In a Nutshell   
 In a nutshell here's how to use this templete, so **for example** assume you want to implement VGG model so you should do the following:
