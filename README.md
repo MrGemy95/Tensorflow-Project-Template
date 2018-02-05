@@ -1,8 +1,8 @@
 # Tensorflow Project Template
-A simple and well designed structure is essential for any Deep Learning project, so after a lot of practice and contributing in tensorflow projects here's a tensorflow project templete that combines   **simplcity**, **best practice for folder structure** and **good OOP design**.
+A simple and well designed structure is essential for any Deep Learning project, so after a lot of practice and contributing in tensorflow projects here's a tensorflow project template that combines   **simplcity**, **best practice for folder structure** and **good OOP design**.
 The main idea is that there's much stuff you do every time you start your tensorflow project so wrapping all this shared stuff will help you to change just the core idea everytime you start a new tensorflow project.
 
-**So here's a simple tensorflow templete that help you get into your main project faster and just focus on your core (Model, Training, ...etc)**
+**So here's a simple tensorflow template that help you get into your main project faster and just focus on your core (Model, Training, ...etc)**
 # Table Of Content
 
 -  [In a Nutshell](#in-a-nutshell)
@@ -14,13 +14,13 @@ The main idea is that there's much stuff you do every time you start your tensor
         -  [Trainer](#trainer)
         -  [Data Loader](#data-loader)
         -  [Logger](#logger)
-        -  [Configration](#configration)
+        -  [Configration](#configuration)
         -  [Main](#main)
  -  [Future Works](#future-works)
  -  [Contributing](#Contributing)
 
 # In a Nutshell   
-In a nutshell here's how to use this templete, so **for example** assume you want to implement VGG model so you should do the following:
+In a nutshell here's how to use this template, so **for example** assume you want to implement VGG model so you should do the following:
 -  In models folder create a class named VGG that inherit the "base_model" class
 
 ```python
@@ -90,7 +90,7 @@ In a nutshell here's how to use this templete, so **for example** assume you wan
     trainer.train()
 
 ```
-**You will a templete file and a simple example in the model and trainer folder that shows you how to try your first model simply.** 
+**You will a template file and a simple example in the model and trainer folder that shows you how to try your first model simply.** 
 
 
 # In Details
@@ -125,7 +125,7 @@ Folder structure
 │                         
 │  
 ├──  data _loader  
-│    └── data_generator.py  - here's the data_generator that responsiple for all data handling.
+│    └── data_generator.py  - here's the data_generator that responsible for all data handling.
 │ 
 └── utils
      ├── logger.py
@@ -164,11 +164,11 @@ Folder structure
     1. Create your trainer class and Inherit the base_trainer class.
     2. override these two functions "train_step", "train_epoch" where you implement the training process of each step and each epoch.
 ### Data Loader
-These class is responsiple for all data handling and processing and provide an easy interface that can be used by the trainer.
+These class is responsible for all data handling and processing and provide an easy interface that can be used by the trainer.
 ### Logger
-This class is responsiple for the tensorboard summary, in your trainer create a dictionary of all tensorflow variables you want to summarize then pass this dictionary to logger.summarize().
+This class is responsible for the tensorboard summary, in your trainer create a dictionary of all tensorflow variables you want to summarize then pass this dictionary to logger.summarize().
 ### Configration
-I use Json as configration method and then parse it, so write all configs you want then parse it using "utils/config/process_config" and pass this configration object to all other objects.
+I use Json as configuration method and then parse it, so write all configs you want then parse it using "utils/config/process_config" and pass this configuration object to all other objects.
 ### Main
 Here's where you combine all previous part.
 1. Parse the config file.
