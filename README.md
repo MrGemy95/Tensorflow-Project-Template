@@ -1,4 +1,4 @@
-# Tensorflow Project Templete
+# Tensorflow Project Template
 A simple and well designed structure is essential for any Deep Learning project, so after a lot of practice and contributing in tensorflow projects here's a tensorflow project templete that combines   **simplcity**, **best practice for folder structure** and **good OOP design**.
 The main idea is that there's much stuff you do every time you start your tensorflow project so wrapping all this shared stuff will help you to change just the core idea everytime you start a new tensorflow project.
 
