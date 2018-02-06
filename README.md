@@ -18,6 +18,7 @@ The main idea is that there's much stuff you do every time you start your tensor
         -  [Main](#main)
  -  [Future Works](#future-works)
  -  [Contributing](#Contributing)
+ -  [Contributing](#acknowledgments)
 
 # In a Nutshell   
 In a nutshell here's how to use this template, so **for example** assume you want to implement VGG model so you should do the following:
