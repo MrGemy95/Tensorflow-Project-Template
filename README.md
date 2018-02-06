@@ -58,8 +58,8 @@ In a nutshell here's how to use this template, so **for example** assume you wan
     def train_epoch(self):
         """
        implement the logic of epoch:
-       -loop ever the number of iteration in the config and call teh train step
-       -add any summaries you want using the sammary
+       -loop on the number of iterations in the config and call the train step
+       -add any summaries you want using the summary
         """
         pass
 
