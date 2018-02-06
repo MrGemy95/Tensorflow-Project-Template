@@ -111,7 +111,7 @@ Folder structure
 ```
 ├──  base
 │   ├── base_model.py   - this file contains the abstract class of the model.
-│   └── ease_train.py - this file contains the abstract class of the trainer.
+│   └── base_train.py - this file contains the abstract class of the trainer.
 │
 │
 ├── model               -This folder contains any model of your project.
