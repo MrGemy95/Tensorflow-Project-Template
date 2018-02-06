@@ -2,9 +2,9 @@ from base.base_model import BaseModel
 import tensorflow as tf
 
 
-class TempleteModel(BaseModel):
+class TemplateModel(BaseModel):
     def __init__(self, config):
-        super(TempleteModel, self).__init__(config)
+        super(TemplateModel, self).__init__(config)
 
         self.build_model()
         self.init_saver()
