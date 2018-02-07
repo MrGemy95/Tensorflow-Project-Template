@@ -10,14 +10,14 @@ The main idea is that there's much stuff you do every time you start your tensor
     -  [Project architecture](#project-architecture)
     -  [Folder structure](#folder-structure)
     -  [ Main Components](#main-components)
-        -  [Model](#model)
+        -  [Models](#models)
         -  [Trainer](#trainer)
         -  [Data Loader](#data-loader)
         -  [Logger](#logger)
         -  [Configration](#configuration)
         -  [Main](#main)
  -  [Future Work](#future-work)
- -  [Contributing](#Contributing)
+ -  [Contributing](#contributing)
  -  [Acknowledgments](#acknowledgments)
 
 # In a Nutshell   
