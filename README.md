@@ -1,9 +1,9 @@
 # Tensorflow Project Template
 A simple and well designed structure is essential for any Deep Learning project, so after a lot of practice and contributing in tensorflow projects here's a tensorflow project template that combines   **simplcity**, **best practice for folder structure** and **good OOP design**.
-The main idea is that there's much stuff you do every time you start your tensorflow project so wrapping all this shared stuff will help you to change just the core idea everytime you start a new tensorflow project.
+The main idea is that there's much stuff you do every time you start your tensorflow project, so wrapping all this shared stuff will help you to change just the core idea every time you start a new tensorflow project.
 
-**So here's a simple tensorflow template that help you get into your main project faster and just focus on your core (Model, Training, ...etc)**
-# Table Of Content
+**So, here's a simple tensorflow template that help you get into your main project faster and just focus on your core (Model, Training, ...etc)**
+# Table Of Contents
 
 -  [In a Nutshell](#in-a-nutshell)
 -  [In Details](#in-details)
@@ -16,7 +16,7 @@ The main idea is that there's much stuff you do every time you start your tensor
         -  [Logger](#logger)
         -  [Configration](#configuration)
         -  [Main](#main)
- -  [Future Works](#future-works)
+ -  [Future Work](#future-work)
  -  [Contributing](#Contributing)
  -  [Contributing](#acknowledgments)
 
@@ -179,7 +179,7 @@ Here's where you combine all previous part.
 4. Now you can train your model by calling "Trainer.train()"
 
 
-# Future Works
+# Future Work
 - Replace the data loader part with new tensorflow dataset API.
 
 # Contributing
