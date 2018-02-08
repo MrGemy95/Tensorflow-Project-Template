@@ -123,7 +123,8 @@ Folder structure
 │   └── example_trainer.py
 │   
 ├──  mains              - here's the main(s) of your project (you may need more than one main).
-│                         
+│    └── example_main.py  - here's an example of main that is responsible for the whole pipeline.
+
 │  
 ├──  data _loader  
 │    └── data_generator.py  - here's the data_generator that is responsible for all data handling.
