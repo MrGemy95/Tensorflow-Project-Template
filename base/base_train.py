@@ -22,7 +22,7 @@ class BaseTrain:
     def train_epoch(self):
         """
         implement the logic of epoch:
-        -loop ever the number of iteration in the config and call teh train step
+        -loop ever the number of iteration in the config and call the train step
         -add any summaries you want using the sammary
         """
         raise NotImplementedError
