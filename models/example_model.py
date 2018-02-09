@@ -28,4 +28,5 @@ class ExampleModel(BaseModel):
 
     def init_saver(self):
         # here you initalize the tensorflow saver that will be used in saving the checkpoints.
-        pass
+        self.saver = tf.train.Saver(max_to_keep=self.config.max_to_keep)
+
