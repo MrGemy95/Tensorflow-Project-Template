@@ -5,7 +5,7 @@ import numpy as np
 
 
 class BaseTrain:
-    def __init__(self, sess, model, data, config,logger):
+    def __init__(self, sess, model, data, config, logger):
         self.model = model
         self.logger = logger
         self.config = config
