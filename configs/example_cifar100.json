@@ -1,0 +1,8 @@
+{
+  "exp_name": "example",
+  "num_epochs": 10,
+  "num_iter_per_epoch": 10,
+  "learning_rate": 0.001,
+  "batch_size": 16,
+  "state_size": [784]
+}
