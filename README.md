@@ -161,6 +161,7 @@ Folder structure
 --------------
 - #### **Base trainer**
     Base trainer is an abstract class that just wrap the training process.
+    
 - #### **Your trainer**
      Here's what you should implement in your trainer.
     1. Create your trainer class and inherit the base_trainer class.
@@ -183,8 +184,10 @@ Here's where you combine all previous part.
 # Future Work
 - Replace the data loader part with new tensorflow dataset API.
 
+
 # Contributing
 Any kind of enhancement, or contribution is welcomed.
+
 
 # Acknowledgments
 Thanks for my colleague  [Mo'men Abdelrazek](https://github.com/moemen95) for contributing in this work.

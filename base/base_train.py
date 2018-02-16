@@ -5,7 +5,7 @@ import numpy as np
 
 
 class BaseTrain:
-    def __init__(self, sess, model, data, config,logger):
+    def __init__(self, sess, model, data, config, logger):
         self.model = model
         self.logger = logger
         self.config = config
@@ -23,7 +23,7 @@ class BaseTrain:
         """
         implement the logic of epoch:
         -loop ever the number of iteration in the config and call teh train step
-        -add any summaries you want using the sammary
+        -add any summaries you want using the summary
         """
         raise NotImplementedError
 
