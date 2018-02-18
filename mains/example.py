@@ -1,5 +1,6 @@
 import tensorflow as tf
 
+import _init_paths
 from data_loader.data_generator import DataGenerator
 from models.example_model import ExampleModel
 from trainers.example_trainer import ExampleTrainer
