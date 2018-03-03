@@ -13,12 +13,12 @@ class BaseModel:
     # save function thet save the checkpoint in the path defined in configfile
     def save(self, sess):
         print("Saving model...")
-        self.saver.save(sess, os.path.join(self.config.checkpoint_dir, self.config.exp_name), self.global_step_tensor)
+        self.saver.save(sess, self.config.checkpoint_dir, self.global_step_tensor)
         print("Model saved")
 
     # load lateset checkpoint from the experiment path defined in config_file
     def load(self, sess):
-        latest_checkpoint = tf.train.latest_checkpoint(os.path.join(self.config.checkpoint_dir, self.config.exp_name))
+        latest_checkpoint = tf.train.latest_checkpoint(self.config.checkpoint_dir)
         if latest_checkpoint:
             print("Loading model checkpoint {} ...\n".format(latest_checkpoint))
             self.saver.restore(sess, latest_checkpoint)
