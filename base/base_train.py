@@ -1,7 +1,4 @@
 import tensorflow as tf
-import os
-from tqdm import tqdm
-import numpy as np
 
 
 class BaseTrain:
@@ -22,7 +19,7 @@ class BaseTrain:
     def train_epoch(self):
         """
         implement the logic of epoch:
-        -loop ever the number of iteration in the config and call teh train step
+        -loop over the number of iterations in the config and call the train step
         -add any summaries you want using the summary
         """
         raise NotImplementedError

@@ -14,9 +14,9 @@ class ExampleModel(BaseModel):
         self.x = tf.placeholder(tf.float32, shape=[None] + self.config.state_size)
         self.y = tf.placeholder(tf.float32, shape=[None, 10])
 
-        # network_architecture
-        d1 = tf.layers.dense(self.x, 512, activation=tf.nn.relu, name="densee2")
-        d2 = tf.layers.dense(d1, 10)
+        # network architecture
+        d1 = tf.layers.dense(self.x, 512, activation=tf.nn.relu, name="dense1")
+        d2 = tf.layers.dense(d1, 10, name="dense2")
 
         with tf.name_scope("loss"):
             self.cross_entropy = tf.reduce_mean(tf.nn.softmax_cross_entropy_with_logits(labels=self.y, logits=d2))
@@ -27,6 +27,6 @@ class ExampleModel(BaseModel):
 
 
     def init_saver(self):
-        # here you initalize the tensorflow saver that will be used in saving the checkpoints.
+        # here you initialize the tensorflow saver that will be used in saving the checkpoints.
         self.saver = tf.train.Saver(max_to_keep=self.config.max_to_keep)
 

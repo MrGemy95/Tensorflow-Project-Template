@@ -11,7 +11,7 @@ from utils.utils import get_args
 
 def main():
     # capture the config path from the run arguments
-    # then process the json configration file
+    # then process the json configuration file
     try:
         args = get_args()
         config = process_config(args.config)
@@ -24,15 +24,15 @@ def main():
     create_dirs([config.summary_dir, config.checkpoint_dir])
     # create tensorflow session
     sess = tf.Session()
-    # create instance of the model you want
+    # create an instance of the model you want
     model = ExampleModel(config)
-    #load model if exist
+    #load model if exists
     model.load(sess)
     # create your data generator
     data = DataGenerator(config)
     # create tensorboard logger
     logger = Logger(sess, config)
-    # create trainer and path all previous components to it
+    # create trainer and pass all the previous components to it
     trainer = ExampleTrainer(sess, model, data, config, logger)
 
     # here you train your model
