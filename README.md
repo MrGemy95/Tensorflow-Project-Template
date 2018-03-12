@@ -73,7 +73,7 @@ In a nutshell here's how to use this template, so **for example** assume you wan
         pass
 
 ```
-- In main file you create the session and create instance of the following objects "Model", "Logger", "Data_Generator", "Trainer", and config
+- In main file, you create the session and instances of the following objects "Model", "Logger", "Data_Generator", "Trainer", and config
 ```python
     sess = tf.Session()
     # create instance of the model you want
@@ -91,7 +91,7 @@ In a nutshell here's how to use this template, so **for example** assume you wan
     trainer.train()
 
 ```
-**You will a template file and a simple example in the model and trainer folder that shows you how to try your first model simply.** 
+**You will find a template file and a simple example in the model and trainer folder that shows you how to try your first model simply.**
 
 
 # In Details
@@ -186,7 +186,7 @@ Here's where you combine all previous part.
 
 
 # Contributing
-Any kind of enhancement, or contribution is welcomed.
+Any kind of enhancement or contribution is welcomed.
 
 
 # Acknowledgments
