@@ -1,11 +1,12 @@
 import tensorflow as tf
 
-from data_loader.data_generator import DataGenerator
-from models.example_model import ExampleModel
-from trainers.example_trainer import ExampleTrainer
+from data_loader.cifar100 import Cifar100DataLoaderNumpy
+from models.cifar_model import CifarModel
+from trainers.cifar_trainer import CifarTrainer
+
 from utils.config import process_config
 from utils.dirs import create_dirs
-from utils.logger import Logger
+from utils.logger import DefinedSummarizer
 from utils.utils import get_args
 
 
@@ -22,16 +23,21 @@ def main():
 
     # create the experiments dirs
     create_dirs([config.summary_dir, config.checkpoint_dir])
+
     # create tensorflow session
     sess = tf.Session()
-    # create instance of the model you want
-    model = ExampleModel(config)
+
     # create your data generator
-    data = DataGenerator(config)
+    data_loader = Cifar100DataLoaderNumpy(config)
+
+    # create instance of the model you want
+    model = CifarModel(data_loader, config)
+
     # create tensorboard logger
-    logger = Logger(sess, config)
+    logger = DefinedSummarizer(sess, config)
+
     # create trainer and path all previous components to it
-    trainer = ExampleTrainer(sess, model, data, config, logger)
+    trainer = CifarTrainer(sess, model, data_loader, config, logger)
 
     # here you train your model
     trainer.train()
