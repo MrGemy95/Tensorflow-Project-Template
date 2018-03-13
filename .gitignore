@@ -5,7 +5,6 @@ __pycache__/
 
 # C extensions
 *.so
-.idea
 # Distribution / packaging
 .Python
 env/
@@ -99,9 +98,12 @@ ENV/
 
 # mypy
 .mypy_cache/
-/experiments/
-.idea/Tensorflow-architecture-templete.iml
-.idea/misc.xml
-.idea/modules.xml
-.idea/workspace.xml
+
+# experiments
 experiments/
+
+# data
+data/cifar-100-python/
+
+# pycharm
+.idea/
