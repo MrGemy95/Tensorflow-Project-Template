@@ -191,8 +191,8 @@ class Cifar100DataLoaderNumpy:
         self.train_len = self.x_train.shape[0]
         self.test_len = self.x_test.shape[0]
 
-        self.train_iterations_per_epoch = (self.train_len + self.config.batch_size - 1) // self.config.batch_size
-        self.test_iterations_per_epoch = (self.test_len + self.config.batch_size - 1) // self.config.batch_size
+        self.num_iterations_train = (self.train_len + self.config.batch_size - 1) // self.config.batch_size
+        self.num_iterations_test = (self.test_len + self.config.batch_size - 1) // self.config.batch_size
 
         print("Data loaded successfully..")
 
