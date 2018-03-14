@@ -26,7 +26,15 @@ class CifarModel(BaseModel):
 
         :return:
         """
-
+        
+        """
+        Helper Variables
+        """
+        self.global_step_tensor = tf.Variable(0, trainable=False, name='global_step')
+        self.global_step_inc = self.global_step_tensor.assign(self.global_step_tensor + 1)
+        self.global_epoch_tensor = tf.Variable(0, trainable=False, name='global_epoch')
+        self.global_epoch_inc = self.global_epoch_tensor.assign(self.global_epoch_tensor + 1)
+        
         """
         Inputs to the network
         """
