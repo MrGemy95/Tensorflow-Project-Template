@@ -1,3 +1,7 @@
+import sys
+
+sys.path.extend(['..'])
+
 import tensorflow as tf
 
 from data_loader.cifar100 import Cifar100DataLoaderNumpy
@@ -34,10 +38,12 @@ def main():
     model = CifarModel(data_loader, config)
 
     # create tensorboard logger
-    logger = DefinedSummarizer(sess, config)
+    logger = DefinedSummarizer(sess, summary_dir=config.summary_dir, 
+                               scalar_tags=['train/loss_per_epoch', 'train/acc_per_epoch',
+                                            'test/loss_per_epoch','test/acc_per_epoch'])
 
     # create trainer and path all previous components to it
-    trainer = CifarTrainer(sess, model, data_loader, config, logger)
+    trainer = CifarTrainer(sess, model, config, logger, data_loader)
 
     # here you train your model
     trainer.train()
