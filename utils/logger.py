@@ -3,7 +3,7 @@ import os
 
 
 class Logger:
-    def __init__(self, sess,config):
+    def __init__(self, sess, config):
         self.sess = sess
         self.config = config
         self.summary_placeholders = {}
