@@ -26,14 +26,12 @@ def main():
     sess = tf.Session()
     # create an instance of the model you want
     model = ExampleModel(config)
-    #load model if exists
-    model.load(sess)
     # create your data generator
     data = DataGenerator(config)
     # create tensorboard logger
     logger = Logger(sess, config)
     # create trainer and pass all the previous components to it
-    trainer = ExampleTrainer(sess, model, data, config, logger)
+    trainer = ExampleTrainer(sess, model, data, config, logger, load=True)
 
     # here you train your model
     trainer.train()

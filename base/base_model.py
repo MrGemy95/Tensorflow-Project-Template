@@ -22,6 +22,8 @@ class BaseModel:
             print("Loading model checkpoint {} ...\n".format(latest_checkpoint))
             self.saver.restore(sess, latest_checkpoint)
             print("Model loaded")
+        else:
+            print("NO model loaded. Training from beginning")
 
     # just initialize a tensorflow variable to use it as epoch counter
     def init_cur_epoch(self):
