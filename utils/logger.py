@@ -1,9 +1,9 @@
 import tensorflow as tf
 import os
 
-
 class Logger:
     def __init__(self, sess,config):
+
         self.sess = sess
         self.config = config
         self.summary_placeholders = {}
@@ -11,6 +11,11 @@ class Logger:
         self.train_summary_writer = tf.summary.FileWriter(os.path.join(self.config.summary_dir, "train"),
                                                           self.sess.graph)
         self.test_summary_writer = tf.summary.FileWriter(os.path.join(self.config.summary_dir, "test"))
+
+        if "comet_api_key" in config:
+            from comet_ml import Experiment
+            self.experiment = Experiment(api_key=config['comet_api_key'], project_name=config['exp_name'])
+            self.experiment.log_multiple_params(config)
 
     # it can summarize scalars and images.
     def summarize(self, step, summarizer="train", scope="", summaries_dict=None):
@@ -42,3 +47,6 @@ class Logger:
                 for summary in summary_list:
                     summary_writer.add_summary(summary, step)
                 summary_writer.flush()
+
+                if self.experiment is not None:
+                    self.experiment.log_multiple_metrics(summaries_dict, step=step)
