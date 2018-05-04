@@ -1,4 +1,4 @@
-# Tensorflow Project Template
+# Tensorflow Project Template  [![CometML](https://img.shields.io/badge/comet.ml-track-brightgreen.svg)](https://www.comet.ml)
 A simple and well designed structure is essential for any Deep Learning project, so after a lot of practice and contributing in tensorflow projects here's a tensorflow project template that combines   **simplcity**, **best practice for folder structure** and **good OOP design**.
 The main idea is that there's much stuff you do every time you start your tensorflow project, so wrapping all this shared stuff will help you to change just the core idea every time you start a new tensorflow project.
 
@@ -170,8 +170,10 @@ Folder structure
 This class is responsible for all data handling and processing and provide an easy interface that can be used by the trainer.
 ### Logger
 This class is responsible for the tensorboard summary, in your trainer create a dictionary of all tensorflow variables you want to summarize then pass this dictionary to logger.summarize().
-This class also supports reporting to Comet.ml which allows you to see all your hyper-params, metrics, graphs, dependencies and more including real-time metric.
-Just add your API key in the configuration file:
+
+
+This class also supports reporting to **Comet.ml** which allows you to see all your hyper-params, metrics, graphs, dependencies and more including real-time metric.
+Add your API key [in the configuration file](configs/example.json#L9):
 
 For example: "comet_api_key": "your key here"
 
