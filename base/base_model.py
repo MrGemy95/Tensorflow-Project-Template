@@ -4,10 +4,20 @@ import tensorflow as tf
 class BaseModel:
     def __init__(self, config):
         self.config = config
+
+        # Attributes needed for global_step and global_epoch
+        self.cur_epoch_tensor = None
+        self.increment_cur_epoch_tensor = None
+        self.global_step_tensor = None
+        self.increment_global_step_tensor = None
+
         # init the global step
         self.init_global_step()
         # init the epoch counter
         self.init_cur_epoch()
+
+        # save attribute .. NOTE DON'T FORGET TO CONSTRUCT THE SAVER ON YOUR MODEL
+        self.saver = None
 
     # save function that saves the checkpoint in the path defined in the config file
     def save(self, sess):
@@ -34,6 +44,9 @@ class BaseModel:
         # DON'T forget to add the global step tensor to the tensorflow trainer
         with tf.variable_scope('global_step'):
             self.global_step_tensor = tf.Variable(0, trainable=False, name='global_step')
+            # this operator if you wanna increment the global_step_tensor by yourself instead of incrementing it
+            # by .minimize function in the optimizers of tensorflow
+            self.increment_global_step_tensor = tf.assign(self.global_step_tensor, self.global_step_tensor + 1)
 
     def init_saver(self):
         # just copy the following line in your child class

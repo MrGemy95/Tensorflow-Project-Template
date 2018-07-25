@@ -1,5 +1,5 @@
 import json
-from bunch import Bunch
+from easydict import EasyDict
 import os
 
 
@@ -14,7 +14,7 @@ def get_config_from_json(json_file):
         config_dict = json.load(config_file)
 
     # convert the dictionary to a namespace using bunch lib
-    config = Bunch(config_dict)
+    config = EasyDict(config_dict)
 
     return config, config_dict
 
