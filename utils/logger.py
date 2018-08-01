@@ -66,7 +66,7 @@ class DefinedSummarizer:
         if summaries_merged is not None:
             self.summary_writer.add_summary(summaries_merged, step)
 
-            if self.experiment is not None:
+            if hasattr(self, 'experiment') and self.experiment is not None:
                 self.experiment.log_multiple_metrics(summaries_dict, step=step)
 
 
@@ -87,6 +87,7 @@ class Logger:
         if "comet_api_key" in config:
             from comet_ml import Experiment
             self.experiment = Experiment(api_key=config['comet_api_key'], project_name=config['exp_name'])
+            self.experiment.disable_mp()
             self.experiment.log_multiple_params(config)
 
 
@@ -123,7 +124,7 @@ class Logger:
                 for summary in summary_list:
                     summary_writer.add_summary(summary, step)
 
-                if self.experiment is not None:
+                if hasattr(self,'experiment') and self.experiment is not None:
                     self.experiment.log_multiple_metrics(summaries_dict, step=step)
 
                 summary_writer.flush()
