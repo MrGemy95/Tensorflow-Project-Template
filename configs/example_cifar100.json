@@ -1,0 +1,16 @@
+{
+  "exp_name": "cifar_example_exp_1",
+
+  "image_height": 32,
+  "image_width": 32,
+  "num_classes": 100,
+
+  "batch_size": 64,
+  "num_epochs": 40,
+  "learning_rate": 0.001,
+
+  "max_to_keep": 2,
+
+  "data_loader": "Cifar100DataLoaderNumpy",
+  "data_numpy_pkl": "/media/kokomind/New Volume1/data/cifar/cifar-100-python/data_numpy.pkl"
+}
