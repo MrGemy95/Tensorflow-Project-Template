@@ -135,9 +135,9 @@ class Cifar100TFRecord:
 
         # initialize the dataset
         self.dataset = tf.data.TFRecordDataset(self.config.tfrecord_data)
+        sef.dataset = self.dataset.batch(self.config.batch_size)
         self.dataset = self.dataset.map(Cifar100TFRecord.parser, num_parallel_calls=self.config.batch_size)
         self.dataset = self.dataset.shuffle(1000)
-        self.dataset = self.dataset.batch(self.config.batch_size)
 
         self.iterator = tf.data.Iterator.from_structure(self.dataset.output_types,
                                                         self.dataset.output_shapes)
@@ -149,11 +149,16 @@ class Cifar100TFRecord:
             'label': tf.FixedLenFeature((), tf.int64),
             'image_raw': tf.FixedLenFeature((), tf.string)
         }
-        parsed = tf.parse_single_example(record, keys_to_features)
-        image = tf.decode_raw(parsed['image_raw'], tf.uint8)
-        image = tf.reshape(image, [32, 32, 3])
+
+        def process(image_raw):
+            image = tf.decode_raw(image_raw, tf.uint8)
+            image = tf.reshape(image, [32, 32, 3])
+            image = tf.cast(image, tf.float32)
+
+            return image
+
+        image = tf.map_fn(process, parsed['raw'])
         label = parsed['label']
-        image = tf.cast(image, tf.float32)
 
         return image, label
 
