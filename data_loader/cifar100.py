@@ -135,7 +135,7 @@ class Cifar100TFRecord:
 
         # initialize the dataset
         self.dataset = tf.data.TFRecordDataset(self.config.tfrecord_data)
-        sef.dataset = self.dataset.batch(self.config.batch_size)
+        self.dataset = self.dataset.batch(self.config.batch_size)
         self.dataset = self.dataset.map(Cifar100TFRecord.parser, num_parallel_calls=self.config.batch_size)
         self.dataset = self.dataset.shuffle(1000)
 
