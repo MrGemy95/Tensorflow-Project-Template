@@ -170,6 +170,34 @@ Folder structure
 This class is responsible for all data handling and processing and provide an easy interface that can be used by the trainer.
 ### Logger
 This class is responsible for the tensorboard summary, in your trainer create a dictionary of all tensorflow variables you want to summarize then pass this dictionary to logger.summarize().
+
+
+This class also supports reporting to **Comet.ml** which allows you to see all your hyper-params, metrics, graphs, dependencies and more including real-time metric.
+Add your API key [in the configuration file](configs/example.json#L9):
+
+For example: "comet_api_key": "your key here"
+
+
+### Comet.ml Integration
+This template also supports reporting to Comet.ml which allows you to see all your hyper-params, metrics, graphs, dependencies and more including real-time metric. 
+
+Add your API key [in the configuration file](configs/example.json#L9):
+
+
+For example:  `"comet_api_key": "your key here"` 
+
+Here's how it looks after you start training:
+<div align="center">
+
+<img align="center" width="800" src="https://comet-ml.nyc3.digitaloceanspaces.com/CometDemo.gif">
+
+</div>
+
+You can also link your Github repository to your comet.ml project for full version control. 
+[Here's a live page showing the example from this repo](https://www.comet.ml/gidim/tensorflow-project-template/caba580d8d1547ccaed982693a645507/chart)
+
+
+
 ### Configuration
 I use Json as configuration method and then parse it, so write all configs you want then parse it using "utils/config/process_config" and pass this configuration object to all other objects.
 ### Main
