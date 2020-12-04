@@ -8,5 +8,10 @@ def get_args():
         metavar='C',
         default='None',
         help='The Configuration file')
+    argparser.add_argument(
+        '-t', '--train',
+        default=False,
+        action='store_true',
+        help='Specify the process training or validation, default value is False for validation')
     args = argparser.parse_args()
     return args
