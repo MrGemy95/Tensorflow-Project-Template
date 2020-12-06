@@ -1,34 +1,11 @@
 import numpy as np
 import tensorflow as tf
-from tensorflow.examples.tutorials.mnist import input_data
 from tensorflow import keras
 from PIL import Image
 from bunch import Bunch
 import math
 import cv2
 import matplotlib.pyplot as plt
-"""
-class DataSet:
-    def __init__(self, config):
-        self.config = config
-        self.data = input_data.read_data_sets('../dataset/mnist', one_hot=True)
-
-
-    def next_batch(self, batch_size):
-        x, label = self.data.train.next_batch(batch_size)
-        x = np.reshape(x, (-1,28,28, 1))
-        return x, label
-
-
-if __name__ == "__main__":
-    data = DataSet(config=None)
-    x, label = data.next_batch(2)
-    print(type(x), type(label))
-    print(x.shape, x.ndim)
-    print(x.max(), x.min(), x.mean())
-    print(label.shape, label.ndim)
-    print(label.max(), label.min(), label.mean())
-"""
 
 class DataSet:
     def __init__(self, config):
@@ -44,19 +21,23 @@ class DataSet:
             config.num_iter_per_epoch      = train_batch_num
             self.config.num_iter_per_epoch = train_batch_num
 
-        with tf.variable_scope("dataset"):
+        with tf.name_scope("dataset"):
             #generate the dataset
             train_dataset, val_dataset = self.gen_dataset(x_train, y_train, x_test, y_test, self.train_img_cnt, config.batch_size)
             #data access iterator,both for train and val
-            self.train_iter = tf.data.Iterator.from_structure(train_dataset.output_types, train_dataset.output_shapes)
+            self.train_iter = iter(train_dataset)
+            self.val_iter = iter(val_dataset)
             # should be called in each epoch
-            self.train_init_op = self.train_iter.make_initializer(train_dataset)
-            self.val_init_op   = self.train_iter.make_initializer(val_dataset)
+            #self.train_init_op = self.train_iter.make_initializer(train_dataset)
+            #self.val_init_op   = self.train_iter.make_initializer(val_dataset)
 
     #use the tf.Dataset to prepare the data
-    def get_next(self):
-        with tf.variable_scope("get_next"):
-            image, label = self.train_iter.get_next()
+    def get_next(self, data = "train"):
+        with tf.name_scope("get_next"):
+            if data == "train":
+                image, label = next(self.train_iter)
+            else:
+                image, label = next(self.val_iter)
             #add some image processing with tensorflow here
             x = tf.expand_dims(image, axis = -1)
             x = tf.cast(x,dtype=tf.float32)
@@ -76,15 +57,19 @@ class DataSet:
     def gen_dataset(self, x_train, y_train, x_test, y_test, train_cnt, batch_size):
         #input a txt file which contain the image and lable information
         train_dataset = tf.data.Dataset.zip(
-            (tf.data.Dataset.from_tensor_slices(x_train), tf.data.Dataset.from_tensor_slices(y_train)))
+            (tf.data.Dataset.from_tensor_slices(tf.convert_to_tensor(x_train)),
+             tf.data.Dataset.from_tensor_slices(tf.convert_to_tensor(y_train)))
+        )
         train_dataset = train_dataset.shuffle(train_cnt)
         train_dataset = train_dataset.batch(batch_size)
         train_dataset = train_dataset.repeat()
         #train_dataset = train_dataset.prefetch(4)
 
         val_dataset = tf.data.Dataset.zip(
-            (tf.data.Dataset.from_tensor_slices(x_test), tf.data.Dataset.from_tensor_slices(y_test)))
-        val_dataset = val_dataset.batch(1)
+            (tf.data.Dataset.from_tensor_slices(tf.convert_to_tensor(x_test)),
+             tf.data.Dataset.from_tensor_slices(tf.convert_to_tensor(y_test)))
+        )
+        val_dataset = val_dataset.batch(5)
         #val_dataset = val_dataset.prefetch(4)
         return train_dataset, val_dataset
 
@@ -119,34 +104,30 @@ if __name__ == "__main__":
         cv2.imshow(title, img_data)
         cv2.waitKey(2000)
 
-    x, y = data.get_next()
-    with tf.Session()  as sess:
-        data.init_train_iter(sess)
-        for _ in range(2):
-            x_, y_ = sess.run([x, y])
-        print(type(x_))
-        print(x_.shape, x_.ndim)
-        print(type(y_))
-        print(y_.shape, y_.ndim)
-        show_image_cv(x_[0,...], title="img-"+str(np.argmax(y_[0])))
+    x_, y_ = data.get_next()
+    print(type(x_), type(x_.numpy()))
+    print(x_.shape, x_.ndim)
+    print(type(y_), type(y_.numpy()))
+    print(y_.shape, y_.ndim)
+    for i in range(x_.shape[0]):
+        show_image_cv(x_.numpy()[i,...], title="img-train")
+        print(np.max(x_.numpy()))
 
-        print(np.max(x_))
+    x_, y_ = data.get_next(data="val")
+    print(type(x_), type(x_.numpy()))
+    print(x_.shape, x_.ndim)
+    print(type(y_), type(y_.numpy()))
+    print(y_.shape, y_.ndim)
+    for i in range(x_.shape[0]):
+        show_image_cv(x_.numpy()[i,...], title="img-val")
+        print(np.max(x_.numpy()))
 
-        data.init_val_iter(sess)
-        for _ in range(2):
-            x_, y_ = sess.run([x, y])
-        print(type(x_))
-        print(x_.shape, x_.ndim)
-        print(type(y_))
-        print(y_.shape, y_.ndim)
-        show_image_cv(x_[0, ...], title="img-"+str(np.argmax(y_[0])))
-
-        data.init_train_iter(sess)
-        for _ in range(2):
-            x_, y_ = sess.run([x, y])
-        print(type(x_))
-        print(x_.shape, x_.ndim)
-        print(type(y_))
-        print(y_.shape, y_.ndim)
-        show_image_cv(x_[0, ...], title="img-"+str(np.argmax(y_[0])))
+    x_, y_ = data.get_next()
+    print(type(x_), type(x_.numpy()))
+    print(x_.shape, x_.ndim)
+    print(type(y_), type(y_.numpy()))
+    print(y_.shape, y_.ndim)
+    for i in range(x_.shape[0]):
+        show_image_cv(x_.numpy()[i,...], title="img-train")
+        print(np.max(x_.numpy()))
 
