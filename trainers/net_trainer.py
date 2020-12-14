@@ -7,16 +7,6 @@ class NetTrainer(BaseTrain):
     def __init__(self, sess, model, data, config,logger):
         super(NetTrainer, self).__init__(sess, model, data, config, logger)
 
-        self.train_step_function = {
-            "1":self.train_step_v1,
-            "2":self.train_step_v2
-        }
-
-        self.valid_step_function = {
-            "1":self.valid_step_v1,
-            "2":self.valid_step_v2
-        }
-
     def train_epoch(self):
         #init the dataset for each epoch
         #self.data.init_train_iter(self.sess)
@@ -60,30 +50,7 @@ class NetTrainer(BaseTrain):
 
         print("Valid-loss:{}, acc:{}".format(loss, acc))
 
-    def train_step_v1(self):
-        if self.config.dataset_type != "TF":
-            batch_x, batch_y = self.data.next_batch(self.config.batch_size)
-            feed_dict = {self.model.x: batch_x, self.model.y: batch_y, self.model.is_training: True}
-        else:
-            feed_dict = {self.model.is_training: True}
-
-        _, loss, acc, sum = self.sess.run([self.model.train_step, self.model.loss, self.model.accuracy, self.model.summary],
-                                     feed_dict=feed_dict)
-
-        # used to add customer definded summary
-        step = self.model.global_step_tensor.eval(self.sess)
-        if self.config.num_sum_interval > 0 and step % self.config.num_sum_interval == 0:
-            self.logger.train_summary_writer.add_summary(sum, step)
-
-        return loss, acc
-
-    def valid_step_v1(self):
-        feed_dict = {self.model.is_training: False}
-        loss, acc = self.sess.run([self.model.loss, self.model.accuracy], feed_dict=feed_dict)
-
-        return loss, acc
-
-    def train_step_v2(self):
+    def train_step(self):
         def _train_step(model, images, labels):
             with tf.GradientTape() as tape:
                 logits = model.net(images, training=True)
@@ -103,7 +70,7 @@ class NetTrainer(BaseTrain):
         step = self.model.update_global_step()
         return loss, acc
 
-    def valid_step_v2(self):
+    def valid_step(self):
         def _test_step(model, images, labels):
             logits = model.net(images, training=False)
             loss = model.loss(logits, labels)
@@ -116,9 +83,3 @@ class NetTrainer(BaseTrain):
 
         #step = self.model.update_global_step()
         return loss, acc
-
-    def train_step(self):
-        return self.train_step_function[str(self.config.tf_version[0])]()
-
-    def valid_step(self):
-        return self.valid_step_function[str(self.config.tf_version[0])]()
