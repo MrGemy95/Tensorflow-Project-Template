@@ -1,7 +1,9 @@
 import json
 from bunch import Bunch
-import utils.config_val as g_config
 import os
+import tensorflow as tf
+import utils.config_val as g_config
+
 
 
 def get_config_from_json(json_file):
@@ -20,10 +22,11 @@ def get_config_from_json(json_file):
     return config, config_dict
 
 
-def process_config(json_file, is_train):
+def process_config(json_file, is_train=True):
     config, _ = get_config_from_json(json_file)
     config.summary_dir = os.path.join("../experiments", config.exp_name, "summary/")
     config.checkpoint_dir = os.path.join("../experiments", config.exp_name, "checkpoint/")
     config.update(is_train=is_train)
+    config.update(tf_version=[int(i) for i in tf.__version__.split(".")])
     g_config.__init(config)
     return config

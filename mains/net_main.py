@@ -29,7 +29,7 @@ def main():
     # create the experiments dirs
     create_dirs([config.summary_dir, config.checkpoint_dir])
     # create tensorflow session
-    sess = tf.Session()
+    sess = tf.Session() if config.tf_version[0] < 2 else None
     # create your data generator
     if "dataset" in config.dataset:
         dm = importlib.import_module(config.dataset)

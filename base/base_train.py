@@ -8,13 +8,29 @@ class BaseTrain:
         self.config = config
         self.sess = sess
         self.data = data
-        self.init = tf.group(tf.global_variables_initializer(), tf.local_variables_initializer())
-        self.sess.run(self.init)
+        if self.config.tf_version[0] < 2:
+            self.init = tf.group(tf.global_variables_initializer(), tf.local_variables_initializer())
+            self.sess.run(self.init)
+        else:
+            pass
 
-    def train(self):
+        self.train_function = {
+            "1":self.train_v1,
+            "2":self.train_v2
+        }
+
+    def train_v1(self):
         for cur_epoch in range(self.model.cur_epoch_tensor.eval(self.sess), self.config.num_epochs + 1, 1):
             self.train_epoch()
             self.sess.run(self.model.increment_cur_epoch_tensor)
+
+    def train_v2(self):
+        for cur_epoch in range(self.model.cur_epoch_tensor.numpy(), self.config.num_epochs + 1, 1):
+            self.model.update_cur_epoch()
+            self.train_epoch()
+
+    def train(self):
+        self.train_function[str(self.config.tf_version[0])]()
 
     def train_epoch(self):
         """
@@ -25,6 +41,14 @@ class BaseTrain:
         raise NotImplementedError
 
     def train_step(self):
+        """
+        implement the logic of the train step
+        - run the tensorflow session
+        - return any metrics you need to summarize
+        """
+        raise NotImplementedError
+
+    def valid_step(self):
         """
         implement the logic of the train step
         - run the tensorflow session

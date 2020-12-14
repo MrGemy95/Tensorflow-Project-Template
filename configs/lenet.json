@@ -1,22 +1,27 @@
 {
-  "exp_name": "letnet",
-  "num_epochs": 40,
-  "num_iter_per_epoch": 50,
-  "num_sum_interval": 5,
-  "learning_rate": 0.8,
-  "optimizer": "adadelta",
-  "momentum": 0.9,
-  "batch_size": 50,
-  "ratio_valid": 0.01,
-  "state_size": [784],
-  "max_to_keep":5,
   "arch": "models.lenet.lenet",
+  "batch_size": 50,
+  "data_train": "<path>/dataset/mnist/mnist.npz",
   "dataset": "data_loader.dataset_lenet",
   "dataset_type": "TF",
-  "num_class": 10,
+  "exp_name": "lenet",
+  "input_c": 1,
   "input_h": 28,
   "input_w": 28,
-  "input_c": 1,
-  "output_shape": [10],
-  "data_train": "<path>/dataset/mnist/mnist.npz"
+  "learning_rate": 0.8,
+  "max_to_keep": 5,
+  "momentum": 0.9,
+  "num_class": 10,
+  "num_epochs": 40,
+  "num_iter_per_epoch": 50,
+  "num_save_interval": 3,
+  "num_sum_interval": 5,
+  "optimizer": "adadelta",
+  "output_shape": [
+    10
+  ],
+  "ratio_valid": 0.01,
+  "state_size": [
+    784
+  ]
 }

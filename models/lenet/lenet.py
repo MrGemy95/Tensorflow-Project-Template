@@ -16,6 +16,7 @@ import time
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, Activation, BatchNormalization, Flatten, Dense
+from tensorflow.keras import Model
 
 import utils.config_val as g_config
 
@@ -32,34 +33,42 @@ def fetch_data():
         y_test = tf.placeholder(tf.int32, shape=config.output_shape)
     return x, y, x_test, y_test
 
-def inference(inputs, phase_train):
-    config = g_config.get_cfg()
-    with tf.variable_scope(config.exp_name):
-        # Conv => ReLu => Pool
-        x = Conv2D(filters=6, kernel_size=5, padding="same", activation=None, name="block1_conv1")(inputs)
-        x = tf.keras.layers.BatchNormalization(name="batch_norm1")(x, training = phase_train)
-        x = Activation("relu")(x)
-        x = MaxPooling2D(pool_size=(2, 2), strides=(2, 2), name='block1_pool')(x)
-        # Conv => ReLu => Pool input: 14*14*6
-        x = Conv2D(filters=16, kernel_size=5, padding="same", activation=None, name='block1_conv2')(x)
-        x = tf.keras.layers.BatchNormalization(name="batch_norm2")(x, training = phase_train)
-        x = Activation("relu")(x)
-        x = MaxPooling2D(pool_size=(2, 2), strides=(2, 2), name='block1_poo2')(x)
-        # Conv => ReLu => Pool input: 7*7*16
-        # flat
-        x = Flatten(name='flatten')(x)
-        # Dense
-        x = Dense(units=128, activation="relu", name="f1")(x)
-        x = Dense(units=84, activation="relu", name="f2")(x)
-        # softmax分类器
-        logits = Dense(units=config.num_class, name="prediction")(x)
-    return logits
-    #reference:
-    #https://blog.csdn.net/zaf0516/article/details/89958962
-    #https://www.machinecurve.com/index.php/2020/01/15/how-to-use-batch-normalization-with-keras/
 
+class MyModel(Model):
+    def __init__(self):
+        super(MyModel, self).__init__()
+        self.conv1 = Conv2D(filters=6, kernel_size=5, padding="same", activation='relu')
+        self.pool1 = MaxPooling2D(pool_size=(2, 2), strides=(2, 2))
+        self.conv2 = Conv2D(filters=16, kernel_size=5, padding="same", activation='relu')
+        self.pool2 = MaxPooling2D(pool_size=(2, 2), strides=(2, 2))
+        self.flatten = Flatten()
+        self.d1 = Dense(128, activation='relu')
+        self.d2 = Dense(84, activation='relu')
+        self.d3 = Dense(10, activation=None)
 
-def loss(logits, labels, ignore_label=-1, cb=None, name='loss'):
+    def call(self, x):
+        x = self.conv1(x)
+        x = self.pool1(x)
+        x = self.conv2(x)
+        x = self.pool2(x)
+        x = self.flatten(x)
+        x = self.d1(x)
+        x = self.d2(x)
+        o = self.d3(x)
+        return o
+
+# Create an instance of the model
+def gen_net():
+    net = MyModel()
+    net.build(input_shape=(None, 28, 28, 1))
+    net.summary()
+    return net
+
+def gen_optimizer():
+    optimizer = tf.keras.optimizers.Adam()
+    return optimizer
+
+def compute_loss(logits, labels, ignore_label=-1, name='loss'):
     with tf.name_scope(name):
         #prob = tf.nn.softmax(logits)
         loss = tf.nn.softmax_cross_entropy_with_logits(
@@ -67,16 +76,14 @@ def loss(logits, labels, ignore_label=-1, cb=None, name='loss'):
         loss = tf.reduce_mean(loss)
     return loss
 
-
-def acc(logits, labels, ignore_label=-1, name='acc'):
+def compute_acc(logits, labels, ignore_label=-1, name='acc'):
     with tf.name_scope(name):
         prob = tf.nn.softmax(logits)
         correct_pred = tf.equal(tf.argmax(prob, 1), tf.argmax(labels, 1))
         accuracy = tf.reduce_mean(tf.cast(correct_pred, tf.float32))
     return accuracy
 
-
-def predict(logits, name='predict'):
+def compute_predict(logits, name='predict'):
     with tf.name_scope(name):
         prob = tf.squeeze(tf.nn.softmax(logits))
         pred = tf.squeeze(tf.cast(tf.argmax(prob, axis=-1), tf.int32))
@@ -130,3 +137,50 @@ def post_proc(x_raw, y_raw, predict):
     :return:
     """
     print("y_raw:{} predict:{}".format(y_raw, predict))
+
+
+#test
+if __name__ == '__main__':
+
+    class Train():
+        def __init__(self):
+            self.net = gen_net()
+
+            self.optimizer = gen_optimizer()
+
+            self.accuracy = (lambda logits, labels: compute_acc(logits, labels))
+
+            self.loss = (lambda logits, labels: compute_loss(logits, labels))
+
+        def train_step(self, model, optimizer, images, labels):
+            with tf.GradientTape() as tape:
+                logits = model(images, training=True)
+                loss = self.loss(logits, labels)
+            # compute gradient
+            grads = tape.gradient(loss, model.trainable_variables)
+            # update to weights
+            optimizer.apply_gradients(zip(grads, model.trainable_variables))
+
+            acc = self.accuracy(logits, labels)
+            # loss and accuracy is scalar tensor
+            return logits, loss, acc
+
+        def test_step(self, model, images, labels):
+            logits = model(images, training=False)
+            loss = self.loss(logits, labels)
+            acc = self.accuracy(logits, labels)
+            # loss and accuracy is scalar tensor
+            return logits, loss, acc
+
+    train = Train()
+
+    image = tf.random.normal(shape=[2,28,28,1], dtype=tf.float32)
+    print(image.numpy().shape)
+    label = tf.one_hot(tf.range(0, 2), depth=10, axis=-1)
+    for i in range(20):
+        _, loss, acc = train.train_step(train.net, train.optimizer, image, label)
+        print("train loss:{}, acc:{}".format(loss.numpy(), acc.numpy()))
+
+        if i%3 == 0:
+            _, loss, acc = train.test_step(train.net, image, label)
+            print("test loss:{}, acc:{}".format(loss.numpy(), acc.numpy()))

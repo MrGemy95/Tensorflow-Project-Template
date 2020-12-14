@@ -3,17 +3,26 @@ import os
 
 
 class Logger:
-    def __init__(self, sess,config):
+    def __init__(self, sess, config):
         self.sess = sess
         self.config = config
         self.summary_placeholders = {}
         self.summary_ops = {}
-        self.train_summary_writer = tf.summary.FileWriter(os.path.join(self.config.summary_dir, "train"),
-                                                          self.sess.graph)
-        self.test_summary_writer = tf.summary.FileWriter(os.path.join(self.config.summary_dir, "test"))
+        if self.config.tf_version[0] < 2:
+            self.train_summary_writer = tf.summary.FileWriter(os.path.join(self.config.summary_dir, "train"),
+                                                              self.sess.graph)
+            self.test_summary_writer = tf.summary.FileWriter(os.path.join(self.config.summary_dir, "test"))
+        else:
+            self.train_summary_writer = tf.summary.create_file_writer(os.path.join(self.config.summary_dir, "train"))
+            self.test_summary_writer = tf.summary.create_file_writer(os.path.join(self.config.summary_dir, "test"))
+
+        self.summarize_funcion = {
+            "1":self.summarize_v1,
+            "2":self.summarize_v2
+        }
 
     # it can summarize scalars and images.
-    def summarize(self, step, summarizer="train", scope="", summaries_dict=None):
+    def summarize_v1(self, step, summarizer="train", scope="", summaries_dict=None):
         """
         :param step: the step of the summary
         :param summarizer: use the train summary writer or the test one
@@ -42,3 +51,26 @@ class Logger:
                 for summary in summary_list:
                     summary_writer.add_summary(summary, step)
                 summary_writer.flush()
+
+    # for tensorflow2.2
+    def summarize_v2(self, step, summarizer="train", scope="", summaries_dict=None):
+        """
+        :param step: the step of the summary
+        :param summarizer: use the train summary writer or the test one
+        :param scope: variable scope
+        :param summaries_dict: the dict of the summaries values (tag,value)
+        :return:
+        """
+        summary_writer = self.train_summary_writer if summarizer == "train" else self.test_summary_writer
+        with tf.name_scope(scope):
+            if summaries_dict is not None:
+                #https://www.tensorflow.org/tensorboard/get_started
+                with summary_writer.as_default():
+                    for tag, value in summaries_dict.items():
+                        if len(value.shape) <= 1:
+                            tf.summary.scalar(tag, float(value), step = step)
+                        else:
+                            tf.summary.image(tag, value, step = step)
+
+    def summarize(self, *args, **kwargs):
+        self.summarize_funcion[str(self.config.tf_version[0])](*args, **kwargs)

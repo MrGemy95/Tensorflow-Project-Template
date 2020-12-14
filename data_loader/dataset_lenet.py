@@ -70,12 +70,13 @@ class DataSet:
              tf.data.Dataset.from_tensor_slices(tf.convert_to_tensor(y_test)))
         )
         val_dataset = val_dataset.batch(5)
+        val_dataset = val_dataset.repeat()
         #val_dataset = val_dataset.prefetch(4)
         return train_dataset, val_dataset
 
 if __name__ == "__main__":
     config_dict = {
-        "data_train":"D:/job/sandbox_fvg3/multi_tp/dataset/mnist/mnist.npz",
+        "data_train":"<path>/dataset/mnist/mnist.npz",
         "num_class": 10,
         "input_h": 28,
         "input_w": 28,
