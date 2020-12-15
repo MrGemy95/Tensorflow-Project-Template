@@ -36,7 +36,7 @@ class BaseModel:
             print("Model loaded")
 
     # save function that saves the checkpoint in the path defined in the config file
-    def save_v2(self, sess):
+    def save_v2(self, sess = None):
         interval = 1 if int(self.config.num_save_interval) <= 0 else int(self.config.num_save_interval)
         if int(self.checkpoint.step) % interval == 0:
             print("Saving model...")
@@ -44,7 +44,7 @@ class BaseModel:
             print("Model saved")
 
     # load latest checkpoint from the experiment path defined in the config file
-    def load_v2(self, sess):
+    def load_v2(self, sess = None):
         latest_checkpoint = self.manager.latest_checkpoint
         if latest_checkpoint:
             print("Loading model checkpoint {} ...\n".format(latest_checkpoint))
@@ -76,16 +76,6 @@ class BaseModel:
         # DON'T forget to add the global step tensor to the tensorflow trainer
         with tf.name_scope('global_step'):
             self.global_step_tensor = tf.Variable(0, trainable=False, name='global_step')
-
-    # this is only used in tensorflow 2
-    def update_cur_epoch(self):
-        self.cur_epoch_tensor.assign_add(1)
-        return self.cur_epoch_tensor.numpy()
-
-    # this is only used in tensorflow 2
-    def update_global_step(self):
-        self.global_step_tensor.assign_add(1)
-        return self.global_step_tensor.numpy()
 
     def init_saver(self):
         # just copy the following line in your child class

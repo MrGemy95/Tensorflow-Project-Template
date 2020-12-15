@@ -15,6 +15,8 @@ class NetTrainer(BaseTrain):
         accs = []
         for _ in loop:
             loss, acc = self.train_step()
+            # update global step in training
+            self.model.global_step_tensor.assign_add(1)
             losses.append(loss)
             accs.append(acc)
         loss = np.mean(losses)
@@ -26,7 +28,7 @@ class NetTrainer(BaseTrain):
             'acc_epoch': acc,
         }
         self.logger.summarize(cur_it, summarizer = "train", summaries_dict=summaries_dict)
-        self.model.save(self.sess)
+
         print("Train-loss:{}, acc:{}".format(loss, acc))
 
         #init the dataset for each epoch
@@ -36,6 +38,8 @@ class NetTrainer(BaseTrain):
         accs = []
         for _ in loop:
             loss, acc = self.valid_step()
+            # NONE update global step in validation
+            # self.model.global_step_tensor.assign_add(1)
             losses.append(loss)
             accs.append(acc)
         loss = np.mean(losses)
@@ -66,8 +70,6 @@ class NetTrainer(BaseTrain):
 
         batch_x, batch_y = self.data.get_next(data = "train")
         _, loss, acc = _train_step(self.model, batch_x, batch_y)
-
-        step = self.model.update_global_step()
         return loss, acc
 
     def valid_step(self):
@@ -80,6 +82,4 @@ class NetTrainer(BaseTrain):
 
         batch_x, batch_y = self.data.get_next(data = "val")
         _, loss, acc = _test_step(self.model, batch_x, batch_y)
-
-        #step = self.model.update_global_step()
         return loss, acc

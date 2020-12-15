@@ -89,6 +89,15 @@ def compute_predict(logits, name='predict'):
         pred = tf.squeeze(tf.cast(tf.argmax(prob, axis=-1), tf.int32))
     return pred
 
+def compute_predict_proc(logits, x_raw, y_raw):
+    prob = tf.squeeze(tf.nn.softmax(logits))
+    pred = tf.squeeze(tf.cast(tf.argmax(prob, axis=-1), tf.int32))
+    gt   = tf.squeeze(tf.cast(tf.argmax(y_raw, axis=-1), tf.int32))
+
+    print("pred:{}".format(pred))
+    print("gt:  {}".format(gt))
+    return None
+
 def metrics_eval(predict, labels, name="metrics"):
     with tf.name_scope(name):
         y = tf.cast(tf.argmax(labels, axis=-1), tf.int32)
@@ -126,18 +135,6 @@ def _get_optimizer(opt_name, params):
         return tf.train.AdagradOptimizer(params['lr'])
     else:
         print('error')
-
-##################### None Tensorflow part  #####################
-def post_proc(x_raw, y_raw, predict):
-    """
-    do some post data process in test procedure, here should be finished WITHOUT tensorflow API
-    :param x_raw:
-    :param y_raw:
-    :param predict:
-    :return:
-    """
-    print("y_raw:{} predict:{}".format(y_raw, predict))
-
 
 #test
 if __name__ == '__main__':

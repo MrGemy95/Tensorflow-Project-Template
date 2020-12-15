@@ -8,8 +8,11 @@ class BasePredict:
         self.config = config
         self.sess = sess
         self.data = data
-        self.init = tf.group(tf.global_variables_initializer(), tf.local_variables_initializer())
-        self.sess.run(self.init)
+        if self.config.tf_version[0] < 2:
+            self.init = tf.group(tf.global_variables_initializer(), tf.local_variables_initializer())
+            self.sess.run(self.init)
+        else:
+            pass
 
     def predict(self):
         self.predict_epoch()

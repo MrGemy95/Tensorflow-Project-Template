@@ -8,18 +8,23 @@ class NetPredictor(BasePredict):
 
     def predict_epoch(self):
         #init the dataset for each epoch
-        self.data.init_val_iter(self.sess)
-        #one element per epoch
+        #self.data.init_val_iter(self.sess)
         loop = tqdm(range(self.data.val_img_cnt))
+        accs = []
         for _ in loop:
-            pred, metrics = self.predict_step()
-
-        print("final metrics:{}".format(metrics))
+            pred, acc = self.predict_step()
+            accs.append(acc)
+        acc = np.mean(accs)
+        print("Valid acc:{}".format(acc))
 
     def predict_step(self):
-        feed_dict = {self.model.is_training: False}
-        x_raw, y_raw, pred, metrics, _ = self.sess.run([self.model.x, self.model.y, self.model.pred, self.model.metrics, self.model.metrics_update],
-                      feed_dict=feed_dict)
+        def _pred_step(model, images, labels):
+            logits  = model.net(images, training=False)
+            metrics = model.accuracy(logits, labels)
+            return logits, metrics
 
-        self.model.post_proc(x_raw, y_raw, pred)
+        batch_x, batch_y = self.data.get_next(data = "val")
+        logits, metrics = _pred_step(self.model, batch_x, batch_y)
+        pred = self.model.pred(logits)
+        _    = self.model.pred_proc(logits, batch_x, batch_y)
         return pred, metrics

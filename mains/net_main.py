@@ -3,9 +3,6 @@ import importlib
 parentdir = os.path.dirname(os.path.abspath(__file__)) + "/.."
 sys.path.insert(0,parentdir)
 
-import tensorflow as tf
-
-from data_loader.data_generator import DataGenerator
 from models.net_model import NetModel
 from trainers.net_trainer import NetTrainer
 from trainers.net_predictor import NetPredictor
@@ -13,7 +10,6 @@ from utils.config import process_config
 from utils.dirs import create_dirs
 from utils.logger import Logger
 from utils.utils import get_args
-
 
 def main():
     # capture the config path from the run arguments
@@ -31,12 +27,8 @@ def main():
     # create tensorflow session
     sess = None
     # create your data generator
-    if "dataset" in config.dataset:
-        dm = importlib.import_module(config.dataset)
-        data = dm.DataSet(config)
-    else:
-        data = DataGenerator(config)
-    
+    dm = importlib.import_module(config.dataset)
+    data = dm.DataSet(config)
     # create an instance of the model you want
     model = NetModel(config, data)
     # create tensorboard logger
@@ -50,6 +42,7 @@ def main():
         model.load(sess)
         trainer.train()
     else:
+        # create predictor and pass all the previous components to it
         predictor = NetPredictor(sess, model, data, config, logger)
         # load model if exists
         model.load(sess)

@@ -26,8 +26,9 @@ class BaseTrain:
 
     def train_v2(self):
         for cur_epoch in range(self.model.cur_epoch_tensor.numpy(), self.config.num_epochs + 1, 1):
-            self.model.update_cur_epoch()
             self.train_epoch()
+            self.model.cur_epoch_tensor.assign_add(1)
+            self.model.save()
 
     def train(self):
         self.train_function[str(self.config.tf_version[0])]()
