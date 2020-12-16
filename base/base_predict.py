@@ -16,6 +16,7 @@ class BasePredict:
 
     def predict(self):
         self.predict_epoch()
+        self.model.save()
 
     def predict_epoch(self):
         """

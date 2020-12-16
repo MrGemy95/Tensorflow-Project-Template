@@ -37,19 +37,11 @@ class BaseModel:
 
     # save function that saves the checkpoint in the path defined in the config file
     def save_v2(self, sess = None):
-        interval = 1 if int(self.config.num_save_interval) <= 0 else int(self.config.num_save_interval)
-        if int(self.checkpoint.step) % interval == 0:
-            print("Saving model...")
-            self.manager.save()
-            print("Model saved")
+        raise NotImplementedError
 
     # load latest checkpoint from the experiment path defined in the config file
     def load_v2(self, sess = None):
-        latest_checkpoint = self.manager.latest_checkpoint
-        if latest_checkpoint:
-            print("Loading model checkpoint {} ...\n".format(latest_checkpoint))
-            self.checkpoint.restore(latest_checkpoint)
-            print("Model loaded")
+        raise NotImplementedError
 
     def save(self, *args):
         self.save_function[str(self.config.tf_version[0])](*args)

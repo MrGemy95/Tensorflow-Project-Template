@@ -45,9 +45,11 @@ class MyModel(Model):
         self.d1 = Dense(128, activation='relu')
         self.d2 = Dense(84, activation='relu')
         self.d3 = Dense(10, activation=None)
+        # https://www.freesion.com/article/9805814731/
+        self._set_inputs(tf.TensorSpec([None, 28, 28, 1], tf.float32, name = "inputs"))  
 
-    def call(self, x):
-        x = self.conv1(x)
+    def call(self, inputs):
+        x = self.conv1(inputs)
         x = self.pool1(x)
         x = self.conv2(x)
         x = self.pool2(x)

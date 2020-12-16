@@ -33,11 +33,33 @@ class NetModel(BaseModel):
     def init_saver(self):
         # here you initialize the tensorflow saver that will be used in saving the checkpoints.
         # https://www.tensorflow.org/guide/checkpoint
-        self.checkpoint = tf.train.Checkpoint(step=self.cur_epoch_tensor,
-                                              optimizer=self.optimizer,
-                                              model=self.net)
-        self.manager = tf.train.CheckpointManager(checkpoint=self.checkpoint,
-                                                  directory=self.config.checkpoint_dir,
-                                                  max_to_keep=self.config.max_to_keep,
-                                                  keep_checkpoint_every_n_hours=None,
-                                                  checkpoint_name="ckpt")
+        self.checkpoint = tf.train.Checkpoint(
+            step=self.cur_epoch_tensor,
+            optimizer=self.optimizer,
+            model=self.net)
+        self.manager = tf.train.CheckpointManager(
+            checkpoint=self.checkpoint,
+            directory=self.config.checkpoint_dir,
+            max_to_keep=self.config.max_to_keep,
+            keep_checkpoint_every_n_hours=None,
+            checkpoint_name="ckpt")
+
+    # save function that saves the checkpoint in the path defined in the config file
+    def save_v2(self, sess = None):
+        interval = 1 if int(self.config.num_save_interval) <= 0 else int(self.config.num_save_interval)
+        if not self.config.is_train:
+            print("Saving model...")
+            self.net.save("saved_model")
+            print("PB Model saved")
+        elif int(self.checkpoint.step) % interval == 0:
+            print("Saving model...")
+            self.manager.save()
+            print("Model saved")
+
+    # load latest checkpoint from the experiment path defined in the config file
+    def load_v2(self, sess = None):
+        latest_checkpoint = self.manager.latest_checkpoint
+        if latest_checkpoint:
+            print("Loading model checkpoint {} ...\n".format(latest_checkpoint))
+            self.checkpoint.restore(latest_checkpoint)
+            print("Model loaded")
