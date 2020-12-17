@@ -24,8 +24,12 @@ def get_config_from_json(json_file):
 
 def process_config(json_file, is_train=True):
     config, _ = get_config_from_json(json_file)
-    config.summary_dir = os.path.join("../experiments", config.exp_name, "summary/")
-    config.checkpoint_dir = os.path.join("../experiments", config.exp_name, "checkpoint/")
+    path = os.path.dirname(os.path.abspath(__file__))
+    path = os.path.join(path, "..")
+    config.root_dir         = path + "/"
+    config.summary_dir      = os.path.join(path, "experiments", config.exp_name, "summary/")
+    config.checkpoint_dir   = os.path.join(path, "experiments", config.exp_name, "checkpoint/")
+    config.saved_model_dir  = os.path.join(path, "experiments", config.exp_name, "saved_model/")
     config.update(is_train=is_train)
     config.update(tf_version=[int(i) for i in tf.__version__.split(".")])
     g_config.__init(config)
