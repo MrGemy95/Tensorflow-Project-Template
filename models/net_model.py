@@ -49,8 +49,10 @@ class NetModel(BaseModel):
         interval = 1 if int(self.config.num_save_interval) <= 0 else int(self.config.num_save_interval)
         if not self.config.is_train:
             print("Saving model...")
-            self.net.save("saved_model")
-            print("PB Model saved")
+            self.net.save(self.config.saved_model_dir)
+            print("==== PB Model saved ===")
+            self.net.save(self.config.checkpoint_dir + "../model.h5",  save_format='h5')
+            print("==== h5 Model saved ====")
         elif int(self.checkpoint.step) % interval == 0:
             print("Saving model...")
             self.manager.save()

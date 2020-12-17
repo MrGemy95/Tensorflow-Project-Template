@@ -16,7 +16,7 @@ import time
 import numpy as np
 import tensorflow as tf
 from tensorflow.keras.layers import Input, Conv2D, MaxPooling2D, Activation, BatchNormalization, Flatten, Dense
-from tensorflow.keras import Model
+from tensorflow.keras import Input, Model, Sequential
 
 import utils.config_val as g_config
 
@@ -48,7 +48,7 @@ class MyModel(Model):
         # https://www.freesion.com/article/9805814731/
         self._set_inputs(tf.TensorSpec([None, 28, 28, 1], tf.float32, name = "inputs"))  
 
-    def call(self, inputs):
+    def call(self, inputs, training = None):
         x = self.conv1(inputs)
         x = self.pool1(x)
         x = self.conv2(x)
@@ -59,9 +59,21 @@ class MyModel(Model):
         o = self.d3(x)
         return o
 
+layers = [
+    Input(shape=(28, 28, 1)),
+    Conv2D(filters=6, kernel_size=5, padding="same", activation='relu'),
+    MaxPooling2D(pool_size=(2, 2), strides=(2, 2)),
+    Conv2D(filters=16, kernel_size=5, padding="same", activation='relu'),
+    MaxPooling2D(pool_size=(2, 2), strides=(2, 2)),
+    Flatten(),
+    Dense(128, activation='relu'),
+    Dense(84, activation='relu'),
+    Dense(10, activation=None)
+]
+
 # Create an instance of the model
 def gen_net():
-    net = MyModel()
+    net = Sequential(layers) #MyModel()
     net.build(input_shape=(None, 28, 28, 1))
     net.summary()
     return net
