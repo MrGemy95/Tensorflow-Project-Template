@@ -31,7 +31,7 @@ In a nutshell here's how to use this template, so **for example** assume you wan
             super(VGGModel, self).__init__(config)
             #call the build_model and init_saver functions.
             self.build_model() 
-            self.init_saver() 
+            self.init_saver() jbkasbdkabwkjbkbwdjbkjwb dkjdb kj,mbdsadkadndbdoldndlidjldnmdhddlandlddkd akdhdba ddd
   ```
 - Override these two functions "build_model" where you implement the vgg model, and "init_saver" where you define a tensorflow saver, then call them in the initalizer.
     
